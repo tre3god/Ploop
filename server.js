@@ -4,9 +4,10 @@ require("./config/database");
 const express = require("express");
 const path = require("path");
 const logger = require("morgan");
-const debug = require("debug")("mern:server");
+const debug = require("debug")("ploop:server");
 
 const usersRouter = require("./routes/api/usersRoutes");
+const recordsRouter = require("./routes/api/recordRoutes");
 const checkTokenMiddleware = require("./config/checkToken");
 
 //* app
@@ -21,15 +22,16 @@ app.use(checkTokenMiddleware);
 
 //* routes
 app.use("/api/users", usersRouter);
+app.use("/api/records", recordsRouter);
 
 //? Catch all routes
 app.get("/*", (req, res) => {
-	res.sendFile(path.join(__dirname, "dist", "index.html"));
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 //* listen
 const port = process.env.PORT || 3000;
 
 app.listen(port, function () {
-	debug(`Express app running on port ${port}`);
+  debug(`Express app running on port ${port}`);
 });
