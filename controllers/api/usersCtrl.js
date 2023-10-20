@@ -44,4 +44,31 @@ const checkToken = (req, res) => {
   res.json(req.exp);
 };
 
-module.exports = { create, login, checkToken };
+const getAllData = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    res.json({ user });
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const saveRecord = async (req, res) => {
+  const { userId, recordId } = req.body;
+  console.log("Received data: ", req.body);
+
+  const user = await User.findById(userId).populate("records");
+  console.log("User before record addition: ", user);
+  try {
+    user.records.push(recordId);
+    await user.save();
+    res.status(200).json({ user, message: "New record saved." });
+  } catch {
+    res.status(403).json({ error: "Error while saving" });
+  }
+};
+
+module.exports = { create, login, checkToken, getAllData, saveRecord };

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { createRecord } from '../../utilities/records-service';
-
+import { addRecord } from '../../utilities/users-service';
 
 export default function AddRecordPage({ user }) {
     const [stoolData, setStoolData] = useState({
         userId: user._id,
         duration: "",
-        blood: "",
-        urgent: "",
-        pain: "",
+        blood: "no",
+        urgent: "no",
+        pain: "no",
         type: "",
         size: "",
         color: "",
@@ -24,8 +24,18 @@ export default function AddRecordPage({ user }) {
     const handleSubmit = async (e) => {
 		e.preventDefault();
 		if (!error) {
+            //create stool record
 			const data = await createRecord(stoolData);
 			console.log(data);
+            
+            //add stool record to user's record array
+            const saveNewUserRecord = await addRecord({
+                userId: user._id,
+                recordId: data._id,
+              });
+            
+        
+            
 		}
 	};
 
@@ -36,12 +46,16 @@ export default function AddRecordPage({ user }) {
                 <label>Duration:</label>
                 <br></br>
                 <label>
-                    <input type="radio" name="duration" value="5 minutes" checked={stoolData.duration === '5 minutes'} onChange={handleChange} />
-                    5 minutes
+                    <input type="radio" name="duration" value="1-3 mins" checked={stoolData.duration === '1-3 mins'} onChange={handleChange} />
+                    1-3 mins
                 </label>
                 <label>
-                    <input type="radio" name="duration" value="10 minutes" checked={stoolData.duration === '10 minutes'} onChange={handleChange} />
-                    10 minutes
+                    <input type="radio" name="duration" value="3-10 mins" checked={stoolData.duration === '3-10 mins'} onChange={handleChange} />
+                    3-10 mins
+                </label>
+                <label>
+                    <input type="radio" name="duration" value="10 mins+" checked={stoolData.duration === '10 mins+'} onChange={handleChange} />
+                    10 mins+
                 </label>
                 <br />
 
@@ -52,7 +66,6 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
@@ -65,7 +78,6 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
@@ -78,7 +90,6 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
                     <option value="yes">Yes</option>
                     <option value="no">No</option>
                 </select>
@@ -91,10 +102,15 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
+                    <option value="">Select Type</option>
                     <option value="1">Type 1</option>
                     <option value="2">Type 2</option>
                     <option value="3">Type 3</option>
+                    <option value="4">Type 4</option>
+                    <option value="5">Type 5</option>
+                    <option value="6">Type 6</option>
+                    <option value="7">Type 7</option>
+
                 </select>
                 <br />
 
@@ -105,7 +121,7 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
+                    <option value="">Select size</option>
                     <option value="small">Small</option>
                     <option value="medium">Medium</option>
                     <option value="large">Large</option>
@@ -119,7 +135,9 @@ export default function AddRecordPage({ user }) {
                     onChange={handleChange}
                     required
                 >
-                    <option value="">Select Duration</option>
+                    <option value="">Select color</option>
+                    <option value="Brown">Brown</option>
+                    <option value="Yellow">Yellow</option>
                     <option value="red">Red</option>
                     <option value="green">Green</option>
                     <option value="black">Black</option>

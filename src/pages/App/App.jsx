@@ -9,6 +9,7 @@ import GraphPage from "../GraphPage/GraphPage";
 import LearnPage from "../LearnPage/LearnPage";
 import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import AddRecordPage from "../AddRecordPage/AddRecordPage"
+import RecordHistoryPage from "../RecordHistoryPage/RecordHistoryPage";
 
 const log = debug("mern:src:App");
 localStorage.debug = "mern:*";
@@ -27,10 +28,11 @@ export default function App() {
 				<>
 					<NavBar user={user} setUser={updateUser} />
 					<Routes>
-						<Route path="/addrecord" element={<AddRecordPage user={user}/>} />
-						<Route path="/user" element={<UserProfilePage />} />
+						<Route path="/user" element={<UserProfilePage user={user} setUser={updateUser}/>} />
+						<Route path="/user/addrecord" element={<AddRecordPage user={user}/>} />
+						<Route path="/user/recordhistory" element={<RecordHistoryPage user={user}/>} />
 						<Route path="/calender" element={<CalenderPage />} />
-						<Route path="/analysis" element={<AnalysisPage />} />
+						<Route path="/analysis" element={<AnalysisPage user={user}/>} />
 						<Route path="/graph" element={<GraphPage />} />
 						<Route path="/learn" element={<LearnPage />} />
 					</Routes>

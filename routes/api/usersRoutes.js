@@ -4,7 +4,10 @@ const usersCtrl = require("../../controllers/api/usersCtrl");
 const ensureLoggedIn = require("../../config/ensureLoggedIn");
 
 router.post("/", usersCtrl.create);
+router.post("/", usersCtrl.saveRecord);
+
 router.post("/login", usersCtrl.login);
 router.get("/check-token", ensureLoggedIn, usersCtrl.checkToken);
+router.post("/recordhistory", usersCtrl.getAllData);
 
 module.exports = router;
