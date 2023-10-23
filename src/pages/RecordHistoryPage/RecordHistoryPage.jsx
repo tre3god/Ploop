@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getRecords } from '../../utilities/records-service';
+import { format } from "date-fns";
+
 
 
 export default function RecordHistoryPage({ user }) {
@@ -21,6 +23,15 @@ export default function RecordHistoryPage({ user }) {
 
   console.log(allRecords)
 
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+  
+    // format date as how i want
+    const formattedDate = format(date, "dd MMMM, yyyy hh:mm a"); 
+
+    return formattedDate;
+  }
+
 
   return (
   <>
@@ -28,7 +39,8 @@ export default function RecordHistoryPage({ user }) {
   
   {allRecords?.map((record, index) => (
     <ul key={index}>
-      <li>{record.createdAt} {record._id} <button>Edit</button> <button>Delete</button></li>
+      <li>{formatDate(record.createdAt) } <br></br>{record._id} <br></br><button>Edit</button> <button>Delete</button></li>
+      <br></br>
     </ul>
   ))}
   </>
