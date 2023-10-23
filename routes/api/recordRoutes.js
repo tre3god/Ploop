@@ -4,5 +4,6 @@ const recordCtrl = require("../../controllers/api/recordCtrl");
 const ensureLoggedIn = require("../../config/ensureLoggedIn");
 
 router.post("/", ensureLoggedIn, recordCtrl.createRecord);
+router.get("/", ensureLoggedIn, recordCtrl.getRecords);
 
 module.exports = router;

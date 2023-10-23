@@ -9,3 +9,8 @@ export async function findUserRecords() {
   const data = await recordAPI.findUserRecords();
   return data;
 }
+
+export async function getRecords(userId) {
+  const data = await recordAPI.getRecords(userId);
+  return data;
+}
