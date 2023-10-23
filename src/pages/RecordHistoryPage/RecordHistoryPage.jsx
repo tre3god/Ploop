@@ -28,7 +28,7 @@ export default function RecordHistoryPage({ user }) {
   
   {allRecords?.map((record, index) => (
     <ul key={index}>
-      <li>{record._id}</li>
+      <li>{record.createdAt} {record._id} <button>Edit</button> <button>Delete</button></li>
     </ul>
   ))}
   </>
