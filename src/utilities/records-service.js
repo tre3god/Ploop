@@ -5,7 +5,7 @@ export async function createRecord(stoolData) {
   return data;
 }
 
-export async function findUserData() {
-  const data = await recordAPI.findUserData();
+export async function findUserRecords() {
+  const data = await recordAPI.findUserRecords();
   return data;
 }

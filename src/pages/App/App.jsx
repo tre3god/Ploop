@@ -29,7 +29,7 @@ export default function App() {
 					<NavBar user={user} setUser={updateUser} />
 					<Routes>
 						<Route path="/user" element={<UserProfilePage user={user} setUser={updateUser}/>} />
-						<Route path="/user/addrecord" element={<AddRecordPage user={user}/>} />
+						<Route path="/user/addrecord" element={<AddRecordPage user={user} setUser={updateUser}/>} />
 						<Route path="/user/recordhistory" element={<RecordHistoryPage user={user}/>} />
 						<Route path="/calender" element={<CalenderPage />} />
 						<Route path="/analysis" element={<AnalysisPage user={user}/>} />

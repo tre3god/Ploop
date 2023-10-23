@@ -5,8 +5,8 @@ const createRecord = (stoolData) => {
   return sendRequest(BASE_URL, "POST", stoolData);
 };
 
-const findUserData = async () => {
+const findUserRecords = async () => {
   return sendRequest(`${BASE_URL}`);
 };
 
-export { createRecord, findUserData };
+export { createRecord, findUserRecords };
