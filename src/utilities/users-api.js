@@ -47,7 +47,7 @@ const checkToken = async () => {
 };
 
 const addRecord = async (data) => {
-  return sendRequest(`${BASE_URL}`, "POST", data);
+  return sendRequest(`${BASE_URL}/addrecord`, "POST", data);
 };
 
 export { postUserData, postUserLogin, checkToken, addRecord };

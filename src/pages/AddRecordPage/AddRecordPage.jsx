@@ -33,6 +33,8 @@ export default function AddRecordPage({ user }) {
                 userId: user._id,
                 recordId: data._id,
               });
+
+              console.log(user)
             
         
             
