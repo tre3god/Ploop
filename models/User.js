@@ -19,6 +19,7 @@ const userSchema = new Schema(
     records: [
       {
         recordId: { type: mongoose.Schema.Types.ObjectId, ref: "Record" },
+        createdAt: { type: Date, default: Date.now },
       },
     ],
   },

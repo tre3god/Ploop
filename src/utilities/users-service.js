@@ -46,6 +46,10 @@ function getToken() {
   return token;
 }
 
+const logOut = () => {
+  localStorage.removeItem("token");
+};
+
 function getUser() {
   const token = getToken();
   if (token === null) {
@@ -56,10 +60,6 @@ function getUser() {
 
   return payload.user;
 }
-
-const logOut = () => {
-  localStorage.removeItem("token");
-};
 
 const checkToken = async () => {
   const data = await userApi.checkToken();

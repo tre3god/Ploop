@@ -1,6 +1,6 @@
 import debug from "debug";
 import AuthPage from "../AuthPage/AuthPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import CalenderPage from "../CalenderPage/CalenderPage";
@@ -10,6 +10,7 @@ import LearnPage from "../LearnPage/LearnPage";
 import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import AddRecordPage from "../AddRecordPage/AddRecordPage"
 import RecordHistoryPage from "../RecordHistoryPage/RecordHistoryPage";
+import { getUser } from "../../utilities/users-service";
 
 const log = debug("mern:src:App");
 localStorage.debug = "mern:*";
@@ -17,9 +18,18 @@ localStorage.debug = "mern:*";
 log("Start app");
 
 export default function App() {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(() => {
+		const storedUser = window.sessionStorage.getItem("user");
+		return storedUser ? JSON.parse(storedUser) : getUser();
+	});
 
-	const updateUser = (user) => setUser(user);
+	const updateUser = (user) => {
+		setUser(user);
+	};
+
+	useEffect(() => {
+		window.sessionStorage.setItem("user", JSON.stringify(user));
+	}, [user]);
 
 	return (
 		<main className="App">

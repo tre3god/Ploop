@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { createRecord } from '../../utilities/records-service';
 import { addRecord } from '../../utilities/users-service';
+import { useNavigate } from 'react-router-dom';
 
-export default function AddRecordPage({ user }) {
+export default function AddRecordPage({ user, setUser }) {
     const [stoolData, setStoolData] = useState({
         userId: user._id,
         duration: "",
@@ -15,6 +16,7 @@ export default function AddRecordPage({ user }) {
         notes: "",
     });
     const [error, setError] = useState("");
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,8 +34,11 @@ export default function AddRecordPage({ user }) {
             const saveNewUserRecord = await addRecord({
                 userId: user._id,
                 recordId: data._id,
+                createTime: data.createdAt
               });
             
+            setUser(saveNewUserRecord)
+            navigate("/user/recordhistory")
             //   console.log(user)
             
         
