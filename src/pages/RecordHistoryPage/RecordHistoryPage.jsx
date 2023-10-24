@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getRecords } from '../../utilities/records-service';
-import { format } from "date-fns";
+import RecordCard from '../../components/RecordCard/RecordCard';
+import LineChart from '../../components/RecordHistoryCharts/LineChart';
 
 
 
@@ -23,26 +24,13 @@ export default function RecordHistoryPage({ user }) {
 
   console.log(allRecords)
 
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-  
-    // format date as how i want
-    const formattedDate = format(date, "dd MMMM, yyyy hh:mm a"); 
-
-    return formattedDate;
-  }
-
-
   return (
   <>
   <div> Record History</div>
+  <br></br>
+  <LineChart allRecords={allRecords} />
+  <RecordCard allRecords={allRecords} />
   
-  {allRecords?.map((record, index) => (
-    <ul key={index}>
-      <li>{formatDate(record.createdAt) } <br></br>{record._id} <br></br><button>Edit</button> <button>Delete</button></li>
-      <br></br>
-    </ul>
-  ))}
   </>
   )
 }
