@@ -1,33 +1,45 @@
 import React from "react";
-import Chart from "chart.js/auto";
+// import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
+import { format } from "date-fns";
 
 
 
 export default function LineChart({ allRecords }) {
-  // Function to prepare data for LineChart
-  const prepareChartData = (records) => {
-    // Group records by day and count them
-    const recordsByDay = records.reduce((acc, record) => {
+  // prep data for line chart
+  const prepareChartData = (allRecords) => {
+    // group records by day and count
+    const recordsByDay = allRecords.reduce((acc, record) => {
       const createdAt = new Date(record.createdAt);
-      const day = new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate()).toISOString();
-      if (acc[day]) {
-        acc[day]++;
-      } else {
-        acc[day] = 1;
-      }
-      return acc;
-    }, {});
+      const day = new Date(createdAt.getFullYear(), createdAt.getMonth(), createdAt.getDate());
 
-    // Extract labels (dates) and data (record counts)
+     // format date using datefns 
+     const formattedDate = format(day, "dd MMMM, yyyy");
+
+     // if same date, increase count
+     if (acc[formattedDate]) {
+       acc[formattedDate]++;
+
+     // if new date, start count from 1
+     } else {
+       acc[formattedDate] = 1;
+     }
+     return acc;
+   }, {});
+
+    // extract labels (dates) 
     const labels = Object.keys(recordsByDay);
+    console.log(labels)
+
+    // extract data (poop counts)
     const data = labels.map((label) => recordsByDay[label]);
+    console.log(data)
 
     return {
       labels,
       datasets: [
         {
-          label: 'Daily Record Count',
+          label: 'Daily Poop Count',
           backgroundColor: 'rgb(255, 99, 132)',
           borderColor: 'rgb(255, 99, 132)',
           data,
