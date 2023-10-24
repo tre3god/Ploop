@@ -28,8 +28,8 @@ export default function RecordHistoryPage({ user }) {
   <>
   <div> Record History</div>
   <br></br>
-  <LineChart allRecords={allRecords} />
-  <RecordCard allRecords={allRecords} />
+  <LineChart allRecords={allRecords} setAllRecords={setAllRecords} />
+  <RecordCard allRecords={allRecords} user={user} />
   
   </>
   )

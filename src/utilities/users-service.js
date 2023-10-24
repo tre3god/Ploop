@@ -72,4 +72,18 @@ const addRecord = async (data) => {
   return newdata;
 };
 
-export { signUp, getUser, getToken, logOut, login, checkToken, addRecord };
+// const deleteRecord = async (recordId, userId) => {
+//   const data = await userApi.deleteRecord(recordId, userId);
+//   return data;
+// };
+
+export {
+  signUp,
+  getUser,
+  getToken,
+  logOut,
+  login,
+  checkToken,
+  addRecord,
+  // deleteRecord,
+};

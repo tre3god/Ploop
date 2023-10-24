@@ -71,4 +71,9 @@ const saveRecord = async (req, res) => {
   }
 };
 
+// const deleteRecord = async (req, res) => {
+//   const { recordId, userId } = req.body;
+//   const user = await User.findById(req.userId).populate("records");
+// };
+
 module.exports = { create, login, checkToken, getAllData, saveRecord };
