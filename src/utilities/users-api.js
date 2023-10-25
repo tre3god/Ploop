@@ -50,14 +50,11 @@ const addRecord = async (data) => {
   return sendRequest(`${BASE_URL}/addrecord`, "POST", data);
 };
 
-// const deleteRecord = async (recordId, userId) => {
-//   return sendRequest(`${BASE_URL}/deleterecord/${recordId}`, "DELETE");
-// };
-
-export {
-  postUserData,
-  postUserLogin,
-  checkToken,
-  addRecord,
-  // deleteRecord
+const deleteRecord = async (recordId, userId) => {
+  return sendRequest(
+    `${BASE_URL}/deleterecord/${recordId}/${userId}`,
+    "DELETE"
+  );
 };
+
+export { postUserData, postUserLogin, checkToken, addRecord, deleteRecord };

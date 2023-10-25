@@ -71,9 +71,35 @@ const saveRecord = async (req, res) => {
   }
 };
 
-// const deleteRecord = async (req, res) => {
-//   const { recordId, userId } = req.body;
-//   const user = await User.findById(req.userId).populate("records");
-// };
+const deleteRecord = async (req, res) => {
+  const { recordId, userId } = req.params;
 
-module.exports = { create, login, checkToken, getAllData, saveRecord };
+  try {
+    // find user by Id
+    const user = await User.findById(userId).populate("records");
+
+    // find index of recordId
+    const recordIndex = user.records.findIndex(
+      (record) => record._id.toString() === recordId
+    );
+
+    if (recordIndex !== -1) {
+      user.records.splice(recordId, 1);
+      await user.save();
+      res.status(200).json({ user, message: "Record deleted" });
+    } else {
+      res.status(404).json({ error: "Record not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+module.exports = {
+  create,
+  login,
+  checkToken,
+  getAllData,
+  saveRecord,
+  deleteRecord,
+};

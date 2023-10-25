@@ -72,10 +72,10 @@ const addRecord = async (data) => {
   return newdata;
 };
 
-// const deleteRecord = async (recordId, userId) => {
-//   const data = await userApi.deleteRecord(recordId, userId);
-//   return data;
-// };
+const deleteRecord = async (recordId, userId) => {
+  const data = await userApi.deleteRecord(recordId, userId);
+  return data;
+};
 
 export {
   signUp,
@@ -85,5 +85,5 @@ export {
   login,
   checkToken,
   addRecord,
-  // deleteRecord,
+  deleteRecord,
 };

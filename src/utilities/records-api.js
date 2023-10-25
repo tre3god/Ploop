@@ -13,4 +13,8 @@ const getRecords = async (userId) => {
   return sendRequest(`${BASE_URL}`);
 };
 
-export { createRecord, findUserRecords, getRecords };
+const deleteRecord = async (recordId) => {
+  return sendRequest(`${BASE_URL}/${recordId}`);
+};
+
+export { createRecord, findUserRecords, getRecords, deleteRecord };
