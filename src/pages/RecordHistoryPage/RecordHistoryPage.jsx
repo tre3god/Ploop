@@ -5,7 +5,7 @@ import LineChart from '../../components/RecordHistoryCharts/LineChart';
 
 
 
-export default function RecordHistoryPage({ user }) {
+export default function RecordHistoryPage({ user, setUser }) {
   const [allRecords, setAllRecords] = useState([]);
   // console.log(user)
 
@@ -29,7 +29,7 @@ export default function RecordHistoryPage({ user }) {
   <div> Record History</div>
   <br></br>
   <LineChart allRecords={allRecords} setAllRecords={setAllRecords} />
-  <RecordCard allRecords={allRecords} user={user} setAllRecords={setAllRecords} />
+  <RecordCard allRecords={allRecords} setAllRecords={setAllRecords} user={user} setUser={setUser} />
   
   </>
   )

@@ -28,7 +28,7 @@ export default function AddRecordPage({ user, setUser }) {
 		if (!error) {
             //create stool record
 			const data = await createRecord(stoolData);
-			console.log(data);
+			// console.log(data);
             
             //add stool record to user's record array
             const saveNewUserRecord = await addRecord({
@@ -37,9 +37,9 @@ export default function AddRecordPage({ user, setUser }) {
                 createTime: data.createdAt
               });
             
-            setUser(saveNewUserRecord)
+
+            setUser(saveNewUserRecord.user)
             navigate("/user/recordhistory")
-            //   console.log(user)
             
         
             

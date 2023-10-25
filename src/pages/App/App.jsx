@@ -40,7 +40,7 @@ export default function App() {
 					<Routes>
 						<Route path="/user" element={<UserProfilePage user={user} setUser={updateUser}/>} />
 						<Route path="/user/addrecord" element={<AddRecordPage user={user} setUser={updateUser}/>} />
-						<Route path="/user/recordhistory" element={<RecordHistoryPage user={user}/>} />
+						<Route path="/user/recordhistory" element={<RecordHistoryPage user={user} setUser={updateUser}/>} />
 						<Route path="/calender" element={<CalenderPage />} />
 						<Route path="/analysis" element={<AnalysisPage user={user}/>} />
 						<Route path="/graph" element={<GraphPage />} />

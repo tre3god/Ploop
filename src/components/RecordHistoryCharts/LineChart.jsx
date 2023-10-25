@@ -29,11 +29,11 @@ export default function LineChart({ allRecords }) {
 
     // extract labels (dates) 
     const labels = Object.keys(recordsByDay);
-    console.log(labels)
+    // console.log(labels)
 
     // extract data (poop counts)
     const data = labels.map((label) => recordsByDay[label]);
-    console.log(data)
+    // console.log(data)
 
     return {
       labels,

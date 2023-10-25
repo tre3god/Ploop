@@ -25,7 +25,7 @@ async function getRecords(req, res) {
 async function deleteRecord(req, res) {
   try {
     const { recordId } = req.params;
-    const record = await Record.findOneAndDelete({ recordId });
+    const record = await Record.findOneAndDelete({ _id: recordId });
     res.json(record);
   } catch (error) {
     res.status(500).json({ error: "Error deleting record" });

@@ -84,7 +84,7 @@ const deleteRecord = async (req, res) => {
     );
 
     if (recordIndex !== -1) {
-      user.records.splice(recordId, 1);
+      user.records.splice(recordIndex, 1);
       await user.save();
       res.status(200).json({ user, message: "Record deleted" });
     } else {

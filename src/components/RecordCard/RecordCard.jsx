@@ -4,7 +4,7 @@ import * as userService from "../../utilities/users-service"
 import * as recordsService from "../../utilities/records-service"
 
 
-export default function RecordCard({ allRecords, setAllRecords, user }) {
+export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
     function formatDate(dateString) {
     const date = new Date(dateString);
   
@@ -23,12 +23,11 @@ export default function RecordCard({ allRecords, setAllRecords, user }) {
         // delete recordId from user model (done)
         const updatedUser = await userService.deleteRecord(recordId, userId);
         console.log(updatedUser)
+        setUser(updatedUser.user)
 
-        // delete record from record model (doing)
-        // const updatedRecords = await recordsService.deleteRecord(recordId);
-        // console.log(updatedRecords)
-        //cannot do like this because in user model is only recordId, need to refetch
-        // setAllRecords(updatedRecords)
+        // delete record from record model (successfully deleted from record model)
+        const updatedRecords = await recordsService.deleteRecord(recordId);
+        console.log("updated" + JSON.stringify(updatedRecords))
     } catch (error) {
         console.log(error)
     }
