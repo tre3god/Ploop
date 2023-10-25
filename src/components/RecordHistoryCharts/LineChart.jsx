@@ -2,6 +2,8 @@ import React from "react";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 import { format } from "date-fns";
+import Paper from '@mui/material/Paper';
+
 
 
 
@@ -33,7 +35,7 @@ export default function LineChart({ allRecords }) {
 
     // extract data (poop counts)
     const data = labels.map((label) => recordsByDay[label]);
-    // console.log(data)
+    console.log(data)
 
     return {
       labels,
@@ -50,10 +52,15 @@ export default function LineChart({ allRecords }) {
   const chartData = prepareChartData(allRecords);
 
 
+
   return (
-    <div>
+    <Paper
+      style={{
+        width: "400px", // Set the desired width
+        height: "300px", // Set the desired height
+      }}
+    >
       <Line data={chartData} />
-    </div>
+    </Paper>
   );
 }
-
