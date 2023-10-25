@@ -22,15 +22,20 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     try {
         // delete recordId from user model (done)
         const updatedUser = await userService.deleteRecord(recordId, userId);
-        console.log(updatedUser)
+        // console.log(updatedUser)
         setUser(updatedUser.user)
 
         // delete record from record model (successfully deleted from record model)
         const updatedRecords = await recordsService.deleteRecord(recordId);
-        console.log("updated" + JSON.stringify(updatedRecords))
+        // console.log("updated" + JSON.stringify(updatedRecords))
     } catch (error) {
         console.log(error)
     }
+  }
+
+  const handleEdit = async (event) => {
+    const recordId = event.currentTarget.getAttribute("recordId");
+    console.log(`clicked edit for this recordId ${recordId}`)
   }
 
   return (
@@ -40,20 +45,23 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     {allRecords?.map((record, index) => (
         <ul key={index}>
           <li>{formatDate(record.createdAt) } 
-          <br></br>
-          {record._id} 
-          <br></br>
-          {record.duration}
-          <br></br>
-          Blood: {record.blood}
-          <br></br>
-          <button>Edit</button> 
-          <button
-          onClick={handleDelete}
-          recordId={record._id} 
-          >
-            Delete
-          </button>
+            <br></br>
+            {record._id} 
+            <br></br>
+            {record.duration}
+            <br></br>
+            Blood: {record.blood}
+            <br></br>
+            <button
+              onClick={handleEdit}
+              recordId={record._id} >
+                Edit
+            </button> 
+            <button
+              onClick={handleDelete}
+              recordId={record._id} >
+                Delete
+            </button>
           </li>
           <br></br>
         </ul>
