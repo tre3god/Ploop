@@ -1,5 +1,7 @@
 import debug from "debug";
 import AuthPage from "../AuthPage/AuthPage";
+import LoginPage from "../AuthPage/LoginPage"
+import SignupPage from "../AuthPage/SignupPage"
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
@@ -50,7 +52,6 @@ export default function App() {
 			) : (
 				<>
 				<AuthPage setUser={updateUser} />
-				
 				</>
 			)}
 		</main>
