@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { format } from "date-fns";
 import * as userService from "../../utilities/users-service"
 import * as recordsService from "../../utilities/records-service"
-import EditRecordModal from '../EditRecordModal.jsx/EditRecordModal';
+import EditRecordModal from '../EditRecordModal/EditRecordModal';
 
 
 export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
