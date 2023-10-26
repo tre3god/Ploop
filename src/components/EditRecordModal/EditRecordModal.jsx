@@ -26,7 +26,7 @@ export default function EditRecordModal({ isOpen, onClose, record, onSave }) {
   return (
     <Modal open={isOpen} onClose={onClose}>
       <div style={{ margin: 'auto', width: 300 }}>
-        <Paper style={{ padding: 16 }}>
+        <Paper elevation={3} style={{ padding: 16 }}>
           <label>Duration:</label>
           <br />
           <label>
