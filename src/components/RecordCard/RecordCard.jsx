@@ -28,10 +28,30 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     setEditedRecord({});
   };
   
-  const handleSaveEdit = (editedData) => {
-    // need connect to backend for patch
-    closeEditModal();
-  };
+  const handleSaveEdit = async (editedData) => {
+    // console.log(editedData)
+    const recordId = editedData._id
+    const updatedRecord = await recordsService?.editRecord(editedData, recordId)
+    // console.log(updatedRecord)
+
+    // update state
+    setAllRecords((prevRecords) => {
+    // find index if id match against prev record id
+    const index = prevRecords.findIndex((record) => record._id === recordId);
+
+    if (index !== -1) {
+      const newRecords = [...prevRecords];
+      // replace edited record at newrecord's index
+      newRecords[index] = updatedRecord;
+      return newRecords;
+    }
+
+    // return prev if new record not found
+    return prevRecords;
+  });
+
+  closeEditModal();
+};
 
   function formatDate(dateString) {
     const date = new Date(dateString);

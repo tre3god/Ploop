@@ -32,8 +32,26 @@ async function deleteRecord(req, res) {
   }
 }
 
+async function editRecord(req, res) {
+  try {
+    const { recordId } = req.params;
+    const editedData = req.body;
+    // console.log("edited" + editedData);
+    const record = await Record.findOneAndUpdate(
+      { _id: recordId },
+      editedData,
+      { new: true }
+    );
+    res.json(record);
+    await record.save();
+  } catch (error) {
+    res.status(500).json({ error: "Error updating record" });
+  }
+}
+
 module.exports = {
   createRecord,
   getRecords,
   deleteRecord,
+  editRecord,
 };

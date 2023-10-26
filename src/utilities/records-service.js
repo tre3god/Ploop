@@ -19,3 +19,8 @@ export async function deleteRecord(recordId) {
   const data = await recordAPI.deleteRecord(recordId);
   return data;
 }
+
+export async function editRecord(editedData, recordId) {
+  const data = await recordAPI.editRecord(editedData, recordId);
+  return data;
+}

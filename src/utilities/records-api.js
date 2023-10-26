@@ -17,4 +17,8 @@ const deleteRecord = async (recordId) => {
   return sendRequest(`${BASE_URL}/${recordId}`, "DELETE");
 };
 
-export { createRecord, findUserRecords, getRecords, deleteRecord };
+const editRecord = async (editedData, recordId) => {
+  return sendRequest(`${BASE_URL}/${recordId}/edit`, "PATCH", editedData);
+};
+
+export { createRecord, findUserRecords, getRecords, deleteRecord, editRecord };
