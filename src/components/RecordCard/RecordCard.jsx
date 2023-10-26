@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { format } from "date-fns";
-import * as userService from "../../utilities/users-service"
-import * as recordsService from "../../utilities/records-service"
+import {
+  Paper,
+  Button,
+} from '@mui/material';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
 
 
@@ -85,39 +87,67 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
 
   return (
     <>
-    <EditRecordModal
-    isOpen={isEditModalOpen}
-    onClose={closeEditModal}
-    record={editedRecord}
-    onSave={handleSaveEdit}
-    />
+      <EditRecordModal
+        isOpen={isEditModalOpen}
+        onClose={closeEditModal}
+        record={editedRecord}
+        onSave={handleSaveEdit}
+      />
 
-    <div>RecordCard</div>
-    <br></br>
-    {allRecords?.map((record, index) => (
-        <ul key={index}>
-          <li>{formatDate(record.createdAt) } 
-            <br></br>
-            {record._id} 
-            <br></br>
-            Duration: {record.duration}
-            <br></br>
-            Blood: {record.blood}
-            <br></br>
-            <button
-              onClick={handleEdit}
-              recordId={record._id} >
-                Edit
-            </button> 
-            <button
-              onClick={handleDelete}
-              recordId={record._id} >
-                Delete
-            </button>
-          </li>
-          <br></br>
-        </ul>
+      <div>RecordCard</div>
+      <br></br>
+      {allRecords?.map((record, index) => (
+        <Paper
+          key={index}
+          elevation={3}
+          style={{ padding: 16, marginBottom: 16, width: 350 }}
+        >
+          <div>
+            <strong>Date:</strong> {formatDate(record.createdAt)}
+          </div>
+          <div>
+            <strong>Record Log:</strong> {record._id}
+          </div>
+          <div>
+            <strong>Duration:</strong> {record.duration}
+          </div>
+          <div>
+            <strong>Blood:</strong> {record.blood}
+          </div>
+          <div>
+            <strong>Urgent:</strong> {record.urgent}
+          </div>
+          <div>
+            <strong>Pain:</strong> {record.pain}
+          </div>
+          <div>
+            <strong>Type:</strong> {record.type}
+          </div>
+          <div>
+            <strong>Size:</strong> {record.size}
+          </div>
+          <div>
+            <strong>Color:</strong> {record.color}
+          </div>
+          <Button
+            onClick={handleEdit}
+            recordId={record._id}
+            variant="contained"
+            color="primary"
+            style={{ marginRight: '16px' }}
+          >
+            Edit
+          </Button>
+          <Button
+            onClick={handleDelete}
+            recordId={record._id}
+            variant="contained"
+            color="secondary"
+          >
+            Delete
+          </Button>
+        </Paper>
       ))}
-      </>
-  )
+    </>
+  );
 }
