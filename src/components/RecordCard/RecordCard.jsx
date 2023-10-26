@@ -1,11 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { format } from "date-fns";
 import * as userService from "../../utilities/users-service"
 import * as recordsService from "../../utilities/records-service"
+import EditRecordModal from '../EditRecordModal.jsx/EditRecordModal';
 
 
 export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
-    function formatDate(dateString) {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editedRecord, setEditedRecord] = useState({});
+
+  const handleEdit = async (event) => {
+    const recordId = event.currentTarget.getAttribute("recordId");
+    console.log(`clicked edit for this recordId ${recordId}`)
+
+    // find and match record
+    const recordToEdit = allRecords.find((record) => record._id === recordId);
+    openEditModal(recordToEdit);
+  };
+
+  const openEditModal = (recordToEdit) => {
+    setIsEditModalOpen(true);
+    setEditedRecord(recordToEdit);
+  };
+  
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setEditedRecord({});
+  };
+  
+  const handleSaveEdit = (editedData) => {
+    // need connect to backend for patch
+    closeEditModal();
+  };
+
+  function formatDate(dateString) {
     const date = new Date(dateString);
   
     // format date as how i want
@@ -33,13 +61,17 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     }
   }
 
-  const handleEdit = async (event) => {
-    const recordId = event.currentTarget.getAttribute("recordId");
-    console.log(`clicked edit for this recordId ${recordId}`)
-  }
+
 
   return (
     <>
+    <EditRecordModal
+    isOpen={isEditModalOpen}
+    onClose={closeEditModal}
+    record={editedRecord}
+    onSave={handleSaveEdit}
+    />
+
     <div>RecordCard</div>
     <br></br>
     {allRecords?.map((record, index) => (
@@ -48,7 +80,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
             <br></br>
             {record._id} 
             <br></br>
-            {record.duration}
+            Duration: {record.duration}
             <br></br>
             Blood: {record.blood}
             <br></br>
