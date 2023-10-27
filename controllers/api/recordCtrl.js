@@ -34,6 +34,7 @@ async function deleteRecord(req, res) {
 
 async function editRecord(req, res) {
   try {
+    // need to add validataion here or anybody can add any data in
     const { recordId } = req.params;
     const editedData = req.body;
     // console.log("edited" + editedData);
@@ -45,6 +46,7 @@ async function editRecord(req, res) {
     res.json(record);
     await record.save();
   } catch (error) {
+    // need to have different error codes
     res.status(500).json({ error: "Error updating record" });
   }
 }

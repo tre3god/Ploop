@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Modal, Paper, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { createRecord } from '../../utilities/records-service';
 import { addRecord } from '../../utilities/users-service';
-import { useNavigate } from 'react-router-dom';
 
-// this page has been turned into a modal and put in calender page.
 
-export default function AddRecordPage({ user, setUser }) {
+
+export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
     const [stoolData, setStoolData] = useState({
         userId: user._id,
         duration: "",
@@ -17,8 +18,11 @@ export default function AddRecordPage({ user, setUser }) {
         color: "",
         notes: "",
     });
+
     const [error, setError] = useState("");
     const navigate = useNavigate();
+
+    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -47,7 +51,11 @@ export default function AddRecordPage({ user, setUser }) {
 
     return (
         <>
-            <div>AddRecordPage</div>
+            <Modal open={isOpen} onClose={onClose}>
+            <div style={{ margin: 'auto', width: 300 }}>
+
+            <Paper elevation={3} style={{ padding: 16 }}>
+
             <form onSubmit={handleSubmit}>
                 <label>Duration:</label>
                 <br></br>
@@ -159,6 +167,12 @@ export default function AddRecordPage({ user, setUser }) {
                 <br />
                 <button type='submit'>Submit Record</button>
             </form>
+            </Paper>
+            </div>
+
+            </Modal>
+
         </>
     );
 }
+

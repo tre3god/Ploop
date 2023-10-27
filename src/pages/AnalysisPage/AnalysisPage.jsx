@@ -1,19 +1,36 @@
-import { checkToken } from "../../utilities/users-service";
-import debug from "debug";
-import * as recordsService from "../../utilities/records-service"
+import React, { useState, useEffect } from 'react'
+import { getRecords } from '../../utilities/records-service';
+import RecordCard from '../../components/RecordCard/RecordCard';
+import LineChart from '../../components/RecordHistoryCharts/LineChart';
 
-const log = debug("mern:pages:AnalysisPage");
 
-export default function AnalysisPage({  }) {
-	const handleCheckToken = async () => {
-		const expDate = await checkToken();
-		log(expDate);
-	};
 
-	
-	return (
-		<>
-			<h1>Analysis</h1>
-		</>
-	);
+export default function AnalysisPage({ user, setUser }) {
+  const [allRecords, setAllRecords] = useState([]);
+  // console.log(user)
+
+  useEffect(() => {
+    async function fetchRecords() {
+      try {
+        const userRecords = await getRecords(user._id)
+        setAllRecords(userRecords)
+      } catch (error) {
+        console.log("Error fetching user records", error);
+
+      }
+    }
+    fetchRecords();
+  }, [user]);
+
+  console.log(allRecords)
+
+  return (
+  <>
+  <div> Record History</div>
+  <br></br>
+  <LineChart allRecords={allRecords} setAllRecords={setAllRecords} />
+  <RecordCard allRecords={allRecords} setAllRecords={setAllRecords} user={user} setUser={setUser} />
+  
+  </>
+  )
 }

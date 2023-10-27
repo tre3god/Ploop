@@ -1,50 +1,30 @@
-import React, { useState } from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-import { PickersDay } from '@mui/x-date-pickers/PickersDay';
-import CheckIcon from '@mui/icons-material/Check';
-import Badge from '@mui/material/Badge';
-import TextField from '@mui/material/TextField';
+import React from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import Paper from '@mui/material/Paper';
 
-// reference: https://www.youtube.com/watch?v=BN_wfeG47oQ&t=748s
 
-export default function Calender() {
-  const [date, setDate] = useState(new Date());
-  const [highlightedDays, setHighlightedDays] = useState([1, 2, 13]);
+export default function Calender({ user }) {
+    console.log(user)
+    
 
-  const handleDateChange = (date) => {
-    console.log('Selected Date:', date.toISOString());
-  };
+    // things to do
+    // fetch records match on date string and display on calender
+    // need to find out how to click date and display that date's records
 
-  return (
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDatePicker
-        orientation="portrait"
-        onChange={handleDateChange}
-        disableFuture
-        
-        // dont work still doing
-        renderDay={(day, _value, DayComponentProps) => {
-          const isSelected =
-            !DayComponentProps.outsideCurrentMonth &&
-            highlightedDays.indexOf(day.getDate()) >= 0;
-
-            console.log('Day:', day.getDate());
-            console.log('highlightedDays:', highlightedDays);
-
-          return (
-            <Badge
-              key={day.toString()}
-              overlap='circular'
-              badgeContent={isSelected ? <CheckIcon color='red' /> : undefined}
-            >
-              <PickersDay {...DayComponentProps} />
-            </Badge>
-          );
-        }}
-        
+    return (
+      <>
+      <Paper style={{
+        width: "600px", 
+        height: "510px", 
+      }}>
+      <div style={{position: "relative", zIndex: 0}}>
+      <FullCalendar
+        plugins={[ dayGridPlugin ]}
+        initialView="dayGridMonth"
       />
-    </LocalizationProvider>
-  );
-}
+      </div>
+      </Paper>
+      </>
+    )
+  }

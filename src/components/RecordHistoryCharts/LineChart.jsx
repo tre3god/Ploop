@@ -56,8 +56,8 @@ export default function LineChart({ allRecords }) {
   return (
     <Paper
       style={{
-        width: "400px", // Set the desired width
-        height: "300px", // Set the desired height
+        width: "400px", 
+        height: "300px", 
       }}
     >
       <Line data={chartData} />

@@ -11,9 +11,7 @@ export default function NavBar({ user, setUser }) {
 			<nav>
 				<Link to="/calender">Calender</Link>
 				&nbsp; | &nbsp;
-				<Link to="/analysis">Analysis</Link>
-				&nbsp; | &nbsp;
-				<Link to="/graph">Graph</Link>
+				<Link to="/user/analysis">Analysis</Link>
 				&nbsp; | &nbsp;
 				<Link to="/learn">Learn</Link>
 				&nbsp; | &nbsp;

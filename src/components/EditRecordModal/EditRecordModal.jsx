@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Paper, TextField, Button } from '@mui/material';
+import { Modal, Paper, Button } from '@mui/material';
 
 export default function EditRecordModal({ isOpen, onClose, record, onSave }) {
   const [editedRecord, setEditedRecord] = useState({ ...record });
