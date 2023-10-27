@@ -52,6 +52,9 @@ export default function App() {
 			) : (
 				<>
 				<AuthPage setUser={updateUser} />
+				<Routes>
+					<Route path="/signuppage" element={<SignupPage setUser={setUser}/>} />
+				</Routes>
 				</>
 			)}
 		</main>
