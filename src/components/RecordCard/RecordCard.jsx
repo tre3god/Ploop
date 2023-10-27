@@ -5,6 +5,8 @@ import {
   Button,
 } from '@mui/material';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
+import * as recordsService from '../../utilities/records-service/';
+import * as userService from '../../utilities/users-service';
 
 
 export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
@@ -33,7 +35,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
   const handleSaveEdit = async (editedData) => {
     // console.log(editedData)
     const recordId = editedData._id
-    const updatedRecord = await recordsService?.editRecord(editedData, recordId)
+    const updatedRecord = await recordsService.editRecord(editedData, recordId)
     // console.log(updatedRecord)
 
     // update state

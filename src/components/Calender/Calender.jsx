@@ -24,7 +24,26 @@ export default function Calender() {
         onChange={handleDateChange}
         disableFuture
         
- 
+        // dont work still doing
+        renderDay={(day, _value, DayComponentProps) => {
+          const isSelected =
+            !DayComponentProps.outsideCurrentMonth &&
+            highlightedDays.indexOf(day.getDate()) >= 0;
+
+            console.log('Day:', day.getDate());
+            console.log('highlightedDays:', highlightedDays);
+
+          return (
+            <Badge
+              key={day.toString()}
+              overlap='circular'
+              badgeContent={isSelected ? <CheckIcon color='red' /> : undefined}
+            >
+              <PickersDay {...DayComponentProps} />
+            </Badge>
+          );
+        }}
+        
       />
     </LocalizationProvider>
   );
