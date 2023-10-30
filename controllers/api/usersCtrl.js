@@ -100,6 +100,18 @@ const deleteRecord = async (req, res) => {
   }
 };
 
+const fetchAllUsers = async (req, res) => {
+  try {
+    const users = await User.find({ role: "users" });
+    if (!users) {
+      res.status(200).json({ message: "There are no users." });
+    }
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: "Server error, unable to fetch data" });
+  }
+};
+
 module.exports = {
   create,
   login,
@@ -107,4 +119,5 @@ module.exports = {
   getAllData,
   saveRecord,
   deleteRecord,
+  fetchAllUsers,
 };

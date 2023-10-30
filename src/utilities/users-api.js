@@ -57,4 +57,15 @@ const deleteRecord = async (recordId, userId) => {
   );
 };
 
-export { postUserData, postUserLogin, checkToken, addRecord, deleteRecord };
+const fetchAllUsers = async () => {
+  return sendRequest(`${BASE_URL}/roleuser`);
+};
+
+export {
+  postUserData,
+  postUserLogin,
+  checkToken,
+  addRecord,
+  deleteRecord,
+  fetchAllUsers,
+};

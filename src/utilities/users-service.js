@@ -77,6 +77,11 @@ const deleteRecord = async (recordId, userId) => {
   return data;
 };
 
+const fetchAllUsers = async () => {
+  const data = await userApi.fetchAllUsers();
+  return data;
+};
+
 export {
   signUp,
   getUser,
@@ -86,4 +91,5 @@ export {
   checkToken,
   addRecord,
   deleteRecord,
+  fetchAllUsers,
 };
