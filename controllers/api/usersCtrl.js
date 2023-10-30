@@ -112,6 +112,20 @@ const fetchAllUsers = async (req, res) => {
   }
 };
 
+const fetchOneUser = async (req, res) => {
+  const { userId } = req.params;
+  // console.log(userId);
+  try {
+    const user = await User.find({ _id: userId });
+    if (!user) {
+      res.status(404).json({ message: "User not found." });
+    }
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: "Server error, unable to fetch data" });
+  }
+};
+
 module.exports = {
   create,
   login,
@@ -120,4 +134,5 @@ module.exports = {
   saveRecord,
   deleteRecord,
   fetchAllUsers,
+  fetchOneUser,
 };

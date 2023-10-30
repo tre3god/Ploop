@@ -61,6 +61,10 @@ const fetchAllUsers = async () => {
   return sendRequest(`${BASE_URL}/roleuser`);
 };
 
+const fetchOneUser = async (userId) => {
+  return sendRequest(`${BASE_URL}/search/${userId}`);
+};
+
 export {
   postUserData,
   postUserLogin,
@@ -68,4 +72,5 @@ export {
   addRecord,
   deleteRecord,
   fetchAllUsers,
+  fetchOneUser,
 };

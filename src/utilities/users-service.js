@@ -82,6 +82,11 @@ const fetchAllUsers = async () => {
   return data;
 };
 
+const fetchOneUser = async (userId) => {
+  const data = await userApi.fetchOneUser(userId);
+  return data;
+};
+
 export {
   signUp,
   getUser,
@@ -92,4 +97,5 @@ export {
   addRecord,
   deleteRecord,
   fetchAllUsers,
+  fetchOneUser,
 };

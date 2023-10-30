@@ -10,6 +10,7 @@ import UserProfilePage from "../UserProfilePage/UserProfilePage";
 import { getUser } from "../../utilities/users-service";
 import HcProfPage from "../HcProfPage/HcProfPage";
 import ErrorPage from "../ErrorPage.jsx/ErrorPage";
+import SearchUserPage from "../SearchUserPage/SearchUserPage";
 
 const log = debug("mern:src:App");
 localStorage.debug = "mern:*";
@@ -52,6 +53,7 @@ return (
             <NavBar user={user} setUser={updateUser} />
             <Routes>
 				<Route path="/hcprof" element={<HcProfPage user={user} setUser={updateUser} />} />
+				<Route path="/search/:userId" element={<SearchUserPage user={user} />} />
 				<Route path="*" element={<ErrorPage />} />
 
             </Routes>

@@ -6,6 +6,7 @@ const ensureLoggedIn = require("../../config/ensureLoggedIn");
 router.post("/", usersCtrl.create);
 router.post("/addrecord", ensureLoggedIn, usersCtrl.saveRecord);
 router.get("/roleuser", ensureLoggedIn, usersCtrl.fetchAllUsers);
+router.get("/search/:userId", ensureLoggedIn, usersCtrl.fetchOneUser);
 router.delete(
   "/deleterecord/:recordId/:userId",
   ensureLoggedIn,
