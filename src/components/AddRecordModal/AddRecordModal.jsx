@@ -165,7 +165,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
                     onChange={handleChange}
                 />
                 <br />
-                <button type='submit'>Submit Record</button>
+                <Button type='submit'>Submit Record</Button>
             </form>
             </Paper>
             </div>

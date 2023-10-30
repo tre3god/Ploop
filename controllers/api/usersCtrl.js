@@ -59,15 +59,20 @@ const getAllData = async (req, res) => {
 const saveRecord = async (req, res) => {
   const { userId, recordId } = req.body;
   console.log("Received data: ", req.body);
+  console.log("user's role", req.user.role);
 
-  const user = await User.findById(userId).populate("records");
-  console.log("User before record addition: ", user);
-  try {
-    user.records.push(recordId);
-    await user.save();
-    res.status(200).json({ user, message: "New record saved." });
-  } catch {
-    res.status(403).json({ error: "Error while saving" });
+  if (req.user.role === "users") {
+    const user = await User.findById(userId).populate("records");
+    console.log("User before record addition: ", user);
+    try {
+      user.records.push(recordId);
+      await user.save();
+      res.status(200).json({ user, message: "New record saved." });
+    } catch {
+      res.status(403).json({ error: "Error while saving" });
+    }
+  } else {
+    res.status(403).json({ error: "Unauthorized" });
   }
 };
 

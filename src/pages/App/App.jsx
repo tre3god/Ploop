@@ -34,7 +34,7 @@ return (
   <main className="App">
     {user ? (
       <>
-        {user.role === 'user' && (
+        {user.role === 'users' && (
           <>
             <NavBar user={user} setUser={updateUser} />
             <Routes>
