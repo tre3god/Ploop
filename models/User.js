@@ -16,6 +16,12 @@ const userSchema = new Schema(
       required: true,
     },
     password: { type: String, trim: true, minLength: 3, required: true },
+    role: {
+      type: String,
+      enum: ["users", "hcprof"],
+      required: true,
+      default: "users",
+    },
     records: [
       {
         recordId: { type: mongoose.Schema.Types.ObjectId, ref: "Record" },

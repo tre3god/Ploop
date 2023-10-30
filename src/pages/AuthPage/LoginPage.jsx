@@ -20,7 +20,12 @@ export default function LoginPage({ setUser }) {
 		try {
 			const user = await login(credentials);
 			setUser(user);
-			navigate("/user")
+			if (user.role === 'user') {
+				navigate("/user")
+			} else {
+				navigate("/hcprof")
+			}
+			
 		} catch (error) {
 			setError("Log In Failed - Try Again");
 		}
