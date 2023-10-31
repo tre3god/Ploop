@@ -12,7 +12,7 @@ export default function AnalysisPage({ user, setUser }) {
   useEffect(() => {
     async function fetchRecords() {
       try {
-        const userRecords = await getRecords(user._id)
+        const userRecords = await getRecords()
         setAllRecords(userRecords)
       } catch (error) {
         console.log("Error fetching user records", error);

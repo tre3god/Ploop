@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { fetchOneUser } from '../../utilities/users-service';
+import { getRecords } from '../../utilities/records-service';
+import HcRecordCard from '../../components/HcRecordCard/HcRecordCard';
+
 
 export default function SearchUserPage() {
-  const [queryUser, setQueryUser] = useState()
+  const [queryUser, setQueryUser] = useState();
+  const [oneUserRecords, setOneUserRecords] = useState();
   const { userId } = useParams();
+
   // console.log(userId)
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchRecords() {
+    async function fetchUser() {
       try {
         const userRecord = await fetchOneUser(userId)
         setQueryUser(userRecord)
@@ -18,17 +23,27 @@ export default function SearchUserPage() {
         console.log("Error fetching user records", error);
       }
     }
-    fetchRecords();
+    fetchUser();
   }, [userId]);
 
+
+
+
+
   console.log("queryUser", queryUser)
+  console.log("User's records", oneUserRecords)
 
   return (
     <div>
       {isLoading ? (
         <div>Loading...</div>
       ) : (
+        <>
         <div>User: {queryUser[0].name}'s details and records</div>
+        <div>Email: {queryUser[0].email}</div>
+        <br></br>
+        <HcRecordCard />
+        </>
       )}
     </div>
   );

@@ -10,8 +10,8 @@ export async function findUserRecords() {
   return data;
 }
 
-export async function getRecords(userId) {
-  const data = await recordAPI.getRecords(userId);
+export async function getRecords() {
+  const data = await recordAPI.getRecords();
   return data;
 }
 

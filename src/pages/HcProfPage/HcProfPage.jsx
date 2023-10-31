@@ -52,7 +52,11 @@ export default function HcProfPage({ user }) {
     <h1>User's List</h1>
       <ul>
         {userRecords.map((user) => (
-          <li key={user._id}>{user.name}</li>
+          <li key={user._id}>
+          <Link to={`/search/${user._id}`}>
+          {user.name}
+          </Link>
+          </li>
         ))}
       </ul>
       <br></br>

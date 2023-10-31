@@ -9,7 +9,7 @@ const findUserRecords = async () => {
   return sendRequest(`${BASE_URL}`);
 };
 
-const getRecords = async (userId) => {
+const getRecords = async () => {
   return sendRequest(`${BASE_URL}`);
 };
 
