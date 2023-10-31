@@ -1,3 +1,4 @@
+const { useParams } = require("react-router-dom");
 const Record = require("../../models/Record");
 
 async function createRecord(req, res) {
@@ -19,6 +20,29 @@ async function getRecords(req, res) {
     // Handle errors if any
     console.error("Error fetching records:", error);
     res.status(500).json({ error: "Error fetching records" });
+  }
+}
+
+async function hcGetRecords(req, res) {
+  try {
+    const { userId } = req.params;
+    const records = await Record.find({ userId });
+    res.json(records);
+  } catch (error) {
+    res.status(500).json({ error: "Unable to get record" });
+  }
+}
+
+async function hcGetOneRecord(req, res) {
+  try {
+    const { recordId } = req.params;
+    const record = await Record.findById({ recordId });
+    if (!record) {
+      return res.status(404).json({ error: "Record not found" });
+    }
+    res.json(record);
+  } catch (error) {
+    res.status(500).json({ error: "Unable to find this record" });
   }
 }
 
@@ -56,4 +80,6 @@ module.exports = {
   getRecords,
   deleteRecord,
   editRecord,
+  hcGetRecords,
+  hcGetOneRecord,
 };

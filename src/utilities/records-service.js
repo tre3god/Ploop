@@ -15,6 +15,11 @@ export async function getRecords() {
   return data;
 }
 
+export async function hcGetRecords(userId) {
+  const data = await recordAPI.hcGetRecords(userId);
+  return data;
+}
+
 export async function deleteRecord(recordId) {
   const data = await recordAPI.deleteRecord(recordId);
   return data;
@@ -22,5 +27,10 @@ export async function deleteRecord(recordId) {
 
 export async function editRecord(editedData, recordId) {
   const data = await recordAPI.editRecord(editedData, recordId);
+  return data;
+}
+
+export async function hcGetOneRecord(recordId) {
+  const data = await recordAPI.hcGetOneRecord(recordId);
   return data;
 }

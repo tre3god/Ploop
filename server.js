@@ -8,6 +8,7 @@ const debug = require("debug")("ploop:server");
 
 const usersRouter = require("./routes/api/usersRoutes");
 const recordsRouter = require("./routes/api/recordRoutes");
+const commentsRouter = require("./routes/api/hcProfRoutes");
 const checkTokenMiddleware = require("./config/checkToken");
 
 //* app
@@ -23,6 +24,7 @@ app.use(checkTokenMiddleware);
 //* routes
 app.use("/api/users", usersRouter);
 app.use("/api/records", recordsRouter);
+app.use("/api/comments", commentsRouter);
 
 //? Catch all routes
 app.get("/*", (req, res) => {

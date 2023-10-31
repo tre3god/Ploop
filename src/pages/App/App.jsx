@@ -11,6 +11,7 @@ import { getUser } from "../../utilities/users-service";
 import HcProfPage from "../HcProfPage/HcProfPage";
 import ErrorPage from "../ErrorPage.jsx/ErrorPage";
 import SearchUserPage from "../SearchUserPage/SearchUserPage";
+import HcCommentPage from "../HcCommentPage/HcCommentPage";
 
 const log = debug("mern:src:App");
 localStorage.debug = "mern:*";
@@ -54,6 +55,8 @@ return (
             <Routes>
 				<Route path="/hcprof" element={<HcProfPage user={user} setUser={updateUser} />} />
 				<Route path="/search/:userId" element={<SearchUserPage user={user} />} />
+        <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} />} />
+
 				<Route path="*" element={<ErrorPage />} />
 
             </Routes>

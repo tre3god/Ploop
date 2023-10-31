@@ -1,8 +1,16 @@
 import React from 'react';
 import { format } from 'date-fns';
 import { Paper, Button } from '@mui/material'; 
+import { useNavigate } from 'react-router-dom';
 
 export default function HcRecordCard({ oneUserRecords }) {
+  const navigate = useNavigate();
+
+  const handleComment = (event) => {
+    const recordId = event.currentTarget.getAttribute("recordId");
+    console.log(`clicked comment for ${recordId}`);
+    navigate(`/search/${recordId}/comment`)
+  }
 
   function formatDate(dateString) {
     const date = new Date(dateString);
@@ -50,7 +58,12 @@ export default function HcRecordCard({ oneUserRecords }) {
             <div>
               <strong>Color:</strong> {record.color}
             </div>
-            <Button>Comment</Button>
+            <Button 
+              onClick={handleComment}
+              recordId={record._id}
+            >
+              Comment
+            </Button>
           </Paper>
         ))
       ) : (
