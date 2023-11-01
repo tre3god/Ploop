@@ -8,6 +8,6 @@ router.get("/", ensureLoggedIn, recordCtrl.getRecords);
 router.delete("/:recordId", ensureLoggedIn, recordCtrl.deleteRecord);
 router.patch("/:recordId/edit", ensureLoggedIn, recordCtrl.editRecord);
 router.get("/:userId", ensureLoggedIn, recordCtrl.hcGetRecords);
-router.get("/:recordId", ensureLoggedIn, recordCtrl.hcGetOneRecord);
+router.get("/:recordId/findone", ensureLoggedIn, recordCtrl.hcGetOneRecord);
 
 module.exports = router;

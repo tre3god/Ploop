@@ -36,7 +36,7 @@ async function hcGetRecords(req, res) {
 async function hcGetOneRecord(req, res) {
   try {
     const { recordId } = req.params;
-    const record = await Record.findById({ recordId });
+    const record = await Record.findById({ _id: recordId });
     if (!record) {
       return res.status(404).json({ error: "Record not found" });
     }

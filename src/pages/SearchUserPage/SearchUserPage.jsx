@@ -5,8 +5,7 @@ import { getRecords, hcGetRecords } from '../../utilities/records-service';
 import HcRecordCard from '../../components/HcRecordCard/HcRecordCard';
 
 
-export default function SearchUserPage() {
-  const [queryUser, setQueryUser] = useState();
+export default function SearchUserPage({ queryUser, setQueryUser }) {
   const [oneUserRecords, setOneUserRecords] = useState();
   const { userId } = useParams();
 

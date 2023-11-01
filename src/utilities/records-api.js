@@ -18,7 +18,7 @@ const hcGetRecords = async (userId) => {
 };
 
 const hcGetOneRecord = async (recordId) => {
-  return sendRequest(`${BASE_URL}/${recordId}`);
+  return sendRequest(`${BASE_URL}/${recordId}/findone`);
 };
 
 const deleteRecord = async (recordId) => {

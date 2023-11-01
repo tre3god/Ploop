@@ -4,7 +4,7 @@ import { fetchAllUsers } from '../../utilities/users-service';
 import { Link } from 'react-router-dom';
 
 
-export default function HcProfPage({ user }) {
+export default function HcProfPage() {
   const [userRecords, setUserRecords] = useState([]);
 
   // for search bar

@@ -19,6 +19,7 @@ localStorage.debug = "mern:*";
 log("Start app");
 
 export default function App() {
+  const [queryUser, setQueryUser] = useState();
 	const [user, setUser] = useState(() => {
 		const storedUser = window.sessionStorage.getItem("user");
 		return storedUser ? JSON.parse(storedUser) : getUser();
@@ -54,8 +55,8 @@ return (
             <NavBar user={user} setUser={updateUser} />
             <Routes>
 				<Route path="/hcprof" element={<HcProfPage user={user} setUser={updateUser} />} />
-				<Route path="/search/:userId" element={<SearchUserPage user={user} />} />
-        <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} />} />
+				<Route path="/search/:userId" element={<SearchUserPage user={user} queryUser={queryUser} setQueryUser={setQueryUser}/>} />
+        <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} />} />
 
 				<Route path="*" element={<ErrorPage />} />
 
