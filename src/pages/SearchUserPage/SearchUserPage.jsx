@@ -38,8 +38,8 @@ export default function SearchUserPage({ queryUser, setQueryUser }) {
     fetchRecords();
   }, [userId]);
 
-  console.log("queryUser", queryUser)
-  console.log("User's records", oneUserRecords)
+  // console.log("queryUser", queryUser)
+  // console.log("User's records", oneUserRecords)
 
   
   return (

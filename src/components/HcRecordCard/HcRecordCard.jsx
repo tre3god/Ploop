@@ -58,6 +58,9 @@ export default function HcRecordCard({ oneUserRecords }) {
             <div>
               <strong>Color:</strong> {record.color}
             </div>
+            <div>
+              <strong>Notes:</strong> {record.notes}
+            </div>
             <Button 
               onClick={handleComment}
               recordId={record._id}

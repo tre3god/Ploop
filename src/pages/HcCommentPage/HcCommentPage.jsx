@@ -11,7 +11,7 @@ export default function HcCommentPage({ user, queryUser }) {
     const { recordId } = useParams();
     const [oneRecord, setOneRecord] = useState({});
     const [commentData, setCommentData] = useState({ 
-        advisorName: user.name,
+        advisorName: "",
         stoolRecordId: oneRecord?._id,
         comment: "",
     });
@@ -34,7 +34,7 @@ export default function HcCommentPage({ user, queryUser }) {
     console.log(oneRecord);
 
     useEffect(() => {
-        setCommentData({ ...commentData, stoolRecordId: oneRecord._id });
+        setCommentData({ ...commentData, advisorName: user.name, stoolRecordId: oneRecord._id });
     }, [oneRecord]);
 
     const handleCommentChange = (e) => {
@@ -47,8 +47,13 @@ export default function HcCommentPage({ user, queryUser }) {
         e.preventDefault();
         console.log("click submit comment", commentData)
 
-        const submitComment = await createComment(commentData);
-
+        try {
+            const submitComment = await createComment(commentData);
+            console.log("comment created", submitComment)
+            navigate(`/search/${oneRecord.userId}`)
+        } catch (error) {
+            console.log("Error creating comment", error);
+        }
     };
 
     function formatDate(dateString) {
@@ -93,6 +98,9 @@ export default function HcCommentPage({ user, queryUser }) {
                     </div>
                     <div>
                         <strong>Color:</strong> {oneRecord.color}
+                    </div>
+                    <div>
+                        <strong>Notes:</strong> {oneRecord.notes}
                     </div>
                 </Paper>
             )}
