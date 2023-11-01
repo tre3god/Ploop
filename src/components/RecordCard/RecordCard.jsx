@@ -8,11 +8,13 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
 import * as recordsService from '../../utilities/records-service/';
 import * as userService from '../../utilities/users-service';
+import { useNavigate } from 'react-router-dom';
 
 
 export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedRecord, setEditedRecord] = useState({});
+  const navigate = useNavigate();
 
   const handleEdit = async (event) => {
     const recordId = event.currentTarget.getAttribute("recordId");
@@ -86,6 +88,12 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     }
   }
 
+  const handleClickComment = (event) => {
+    const recordId = event.currentTarget.getAttribute("recordId");
+    console.log(`clicked comments for reccordId: ${recordId}`)
+    navigate(`/search/${recordId}/comment`)
+  }
+
 
 
   return (
@@ -137,7 +145,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
             recordId={record._id}
             variant="contained"
             color="primary"
-            style={{ marginRight: '16px' }}
+            style={{ marginRight: '5px' }}
           >
             Edit
           </Button>
@@ -146,11 +154,21 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
             onClick={handleDelete}
             recordId={record._id}
             variant="contained"
-            color="secondary"
+            color="error"
+            style={{ marginRight: '5px' }}
+
           >
             Delete
           </Button>
-          <Button>Comments</Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginRight: '5px' }}
+            recordId={record._id}
+            onClick={handleClickComment}
+          >
+            Comments
+            </Button>
         </Paper>
       ))}
     </>

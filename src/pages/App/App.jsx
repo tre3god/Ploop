@@ -41,11 +41,12 @@ return (
           <>
             <NavBar user={user} setUser={updateUser} />
             <Routes>
-				<Route path="/user" element={<UserProfilePage user={user} setUser={updateUser} />} />
-				<Route path="/user/analysis" element={<AnalysisPage user={user} setUser={updateUser} />} />
-				<Route path="/calender" element={<CalenderPage user={user} setUser={updateUser} />} />
-				<Route path="/learn" element={<LearnPage />} />
-				<Route path="*" element={<ErrorPage />} />
+              <Route path="/user" element={<UserProfilePage user={user} setUser={updateUser} />} />
+              <Route path="/user/analysis" element={<AnalysisPage user={user} setUser={updateUser} />} />
+              <Route path="/calender" element={<CalenderPage user={user} setUser={updateUser} />} />
+              <Route path="/learn" element={<LearnPage />} />
+              <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </>
         )}
@@ -54,12 +55,10 @@ return (
           <>
             <NavBar user={user} setUser={updateUser} />
             <Routes>
-				<Route path="/hcprof" element={<HcProfPage user={user} setUser={updateUser} />} />
-				<Route path="/search/:userId" element={<SearchUserPage user={user} queryUser={queryUser} setQueryUser={setQueryUser}/>} />
-        <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} />} />
-
-				<Route path="*" element={<ErrorPage />} />
-
+              <Route path="/hcprof" element={<HcProfPage user={user} setUser={updateUser} />} />
+              <Route path="/search/:userId" element={<SearchUserPage user={user} queryUser={queryUser} setQueryUser={setQueryUser}/>} />
+              <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} />} />
+              <Route path="*" element={<ErrorPage />} />
             </Routes>
           </>
         )}

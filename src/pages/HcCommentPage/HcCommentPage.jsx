@@ -19,6 +19,7 @@ export default function HcCommentPage({ user, queryUser }) {
 
     const navigate = useNavigate();
     
+    // fetch individual records details
     useEffect(() => {
         async function getOneRecord() {
             try {
@@ -33,6 +34,7 @@ export default function HcCommentPage({ user, queryUser }) {
     }, [recordId]);
     // console.log(oneRecord);
 
+    // fetch all comments
     useEffect(() => {
         async function getAllComms() {
             try {
@@ -46,6 +48,7 @@ export default function HcCommentPage({ user, queryUser }) {
     }, [])
     console.log("allcomments", allComments)
 
+    //
     useEffect(() => {
         setCommentData({ ...commentData, advisorName: user.name, stoolRecordId: oneRecord._id });
     }, [oneRecord]);
@@ -78,7 +81,7 @@ export default function HcCommentPage({ user, queryUser }) {
     return (
         <>
             <div>
-                Leave your comment for {queryUser[0]?.name}'s stool record.
+                Patient: {queryUser[0]?.name}'s stool record comment page.
             </div>
             {oneRecord._id && (
                 <Paper
@@ -118,22 +121,28 @@ export default function HcCommentPage({ user, queryUser }) {
                 </Paper>
             )}
 
-            <form onSubmit={handleSubmitComment}>
-                
-                <TextField
-                    name="comment"
-                    label="Comment"
-                    fullWidth
-                    margin="normal"
-                    value={commentData.comment}
-                    onChange={handleCommentChange}
-                />
-                <Button type="submit" variant="contained" color="primary">
-                    Submit Comment
-                </Button>
-            </form>
+            {user.role === 'hcprof' && (
+                <form onSubmit={handleSubmitComment}>
+                    <TextField
+                        name="comment"
+                        label="Comment"
+                        fullWidth
+                        margin="normal"
+                        value={commentData.comment}
+                        onChange={handleCommentChange}
+                    />
+                    <Button
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                    >
+                        Submit Comment
+                    </Button>
+                </form>
+            )}
+            <br></br>
             <div>
-                <h2>Past Comments</h2>
+                <h2>Comments History</h2>
                 {allComments?.length > 0 ? (
                     allComments.map((comment, index) => (
                         <Paper
@@ -154,7 +163,7 @@ export default function HcCommentPage({ user, queryUser }) {
                     </Paper>
                         ))
                 ) : (
-                    <p>There are no comments.</p>
+                    <p>There are no past comments for this record.</p>
                 )}
             </div>
         </>
