@@ -41,6 +41,7 @@ export default function SearchUserPage({ queryUser, setQueryUser }) {
   console.log("queryUser", queryUser)
   console.log("User's records", oneUserRecords)
 
+  
   return (
     <div>
       {isLoading ? (
