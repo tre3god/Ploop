@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { login } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { Button, Container, TextField, Typography } from "@mui/material";
 
 export default function LoginPage({ setUser }) {
 	const [credentials, setCredentials] = useState({
@@ -32,29 +33,43 @@ export default function LoginPage({ setUser }) {
 	};
 
 	return (
-		<div>
-			<div className="form-container">
-				<form autoComplete="off" onSubmit={handleSubmit}>
-					<label>Email</label>
-					<input
-						type="text"
-						name="email"
-						value={credentials.email}
-						onChange={handleChange}
-						required
-					/>
-					<label>Password</label>
-					<input
-						type="password"
-						name="password"
-						value={credentials.password}
-						onChange={handleChange}
-						required
-					/>
-					<button type="submit">LOG IN</button>
-				</form>
-			</div>
-			<p className="error-message">&nbsp;{error}</p>
-		</div>
-	);
+    <Container>
+      <div>
+        <Typography variant="h4">
+          Log In
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="Email"
+            type="text"
+            name="email"
+            value={credentials.email}
+            onChange={handleChange}
+            required
+          />
+          <TextField
+            fullWidth
+            label="Password"
+            type="password"
+            name="password"
+            value={credentials.password}
+            onChange={handleChange}
+            required
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            LOG IN
+          </Button>
+        </form>
+      </div>
+      <Typography color="error">
+        {error}
+      </Typography>
+    </Container>
+  );
 }
