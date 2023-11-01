@@ -4,6 +4,7 @@ import {
   Paper,
   Button,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
 import * as recordsService from '../../utilities/records-service/';
 import * as userService from '../../utilities/users-service';
@@ -141,6 +142,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
             Edit
           </Button>
           <Button
+            startIcon={<DeleteIcon />}
             onClick={handleDelete}
             recordId={record._id}
             variant="contained"
@@ -148,6 +150,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
           >
             Delete
           </Button>
+          <Button>Comments</Button>
         </Paper>
       ))}
     </>

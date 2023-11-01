@@ -5,4 +5,8 @@ const createComment = (comment) => {
   return sendRequest(`${BASE_URL}/addcomment`, "POST", comment);
 };
 
-export { createComment };
+const getAllComments = (recordId) => {
+  return sendRequest(`${BASE_URL}/${recordId}/getallcomment`);
+};
+
+export { createComment, getAllComments };

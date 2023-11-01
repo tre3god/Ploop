@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { hcGetOneRecord } from '../../utilities/records-service';
 import { Paper, TextField, Button } from '@mui/material';
 import { format } from 'date-fns';
-import { createComment } from '../../utilities/comments-service'
+import { createComment, getAllComments } from '../../utilities/comments-service'
 import { useNavigate } from 'react-router-dom';
 
 
@@ -15,6 +15,7 @@ export default function HcCommentPage({ user, queryUser }) {
         stoolRecordId: oneRecord?._id,
         comment: "",
     });
+    const [allComments, setAllComments] = useState();
 
     const navigate = useNavigate();
     
@@ -30,8 +31,20 @@ export default function HcCommentPage({ user, queryUser }) {
         
         getOneRecord(); 
     }, [recordId]);
+    // console.log(oneRecord);
 
-    console.log(oneRecord);
+    useEffect(() => {
+        async function getAllComms() {
+            try {
+                const allComms = await getAllComments(recordId);
+                setAllComments(allComms);
+            } catch (error) {
+                console.log("Error fetching all comments", error);
+            }
+        }
+        getAllComms();
+    }, [])
+    console.log("allcomments", allComments)
 
     useEffect(() => {
         setCommentData({ ...commentData, advisorName: user.name, stoolRecordId: oneRecord._id });
@@ -119,6 +132,31 @@ export default function HcCommentPage({ user, queryUser }) {
                     Submit Comment
                 </Button>
             </form>
+            <div>
+                <h2>Past Comments</h2>
+                {allComments?.length > 0 ? (
+                    allComments.map((comment, index) => (
+                        <Paper
+                            key={index}
+                            elevation={3}
+                            style={{ padding: 16, marginBottom: 16, width: 350 }}
+                        >
+                            <div>
+                                <strong>Doctor: </strong>{comment.advisorName}
+                            </div>
+                            <div>
+                                <strong>Comment: </strong>{comment.comment}
+                            </div>
+                            <div>
+                                <strong>Date:</strong> {formatDate(comment.createdAt)}
+                            </div>
+                        
+                    </Paper>
+                        ))
+                ) : (
+                    <p>There are no comments.</p>
+                )}
+            </div>
         </>
     );
 }
