@@ -1,6 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Paper, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import {
+    Modal,
+    Paper,
+    Button,
+    Grid,
+    Select,
+    MenuItem,
+    FormControl,
+    InputLabel,
+    TextareaAutosize,
+    Typography,
+    Radio,
+    RadioGroup,
+    FormControlLabel,
+} from '@mui/material';import { useNavigate } from 'react-router-dom';
 import { createRecord } from '../../utilities/records-service';
 import { addRecord } from '../../utilities/users-service';
 
@@ -13,8 +26,8 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
         blood: "no",
         urgent: "no",
         pain: "no",
-        type: "",
-        size: "",
+        type: "4",
+        size: "medium",
         color: "",
         notes: "",
     });
@@ -54,116 +67,83 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
             <Modal open={isOpen} onClose={onClose}>
             <div style={{ margin: 'auto', width: 450 }}>
 
-            <Paper elevation={3} style={{ padding: 16 }}>
-            <div>Add a new Stool Record!</div>
+            <Paper elevation={3} style={{ padding: 16, width: '400px' }}>
+            <Typography variant="h5" align="center">
+                Add a New Stool Record
+            </Typography>
             <form onSubmit={handleSubmit}>
-                <label>Duration:</label>
-                <br></br>
-                <label>
-                    <input type="radio" name="duration" value="1-3 mins" checked={stoolData.duration === '1-3 mins'} onChange={handleChange} />
-                    1-3 mins
-                </label>
-                <label>
-                    <input type="radio" name="duration" value="3-10 mins" checked={stoolData.duration === '3-10 mins'} onChange={handleChange} />
-                    3-10 mins
-                </label>
-                <label>
-                    <input type="radio" name="duration" value="10 mins+" checked={stoolData.duration === '10 mins+'} onChange={handleChange} />
-                    10 mins+
-                </label>
-                <br />
+            <Grid container spacing={1}>
+                            <Grid item xs={5}>
+                                <Typography>Duration:</Typography>
+                                <FormControl component="fieldset">
+                                    <RadioGroup name="duration" value={stoolData.duration} onChange={handleChange}>
+                                        <FormControlLabel value="1-3 mins" control={<Radio />} label="1-3 mins" />
+                                        <FormControlLabel value="3-10 mins" control={<Radio />} label="3-10 mins" />
+                                        <FormControlLabel value="10 mins+" control={<Radio />} label="10 mins+" />
+                                    </RadioGroup>
+                                </FormControl>
+                            </Grid>
+                            <Grid>
+                                <Typography>Blood:</Typography>
+                                <Select name="blood" value={stoolData.blood} onChange={handleChange}>
+                                    <MenuItem value="yes">Yes</MenuItem>
+                                    <MenuItem value="no">No</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid>
+                                <Typography>Urgent:</Typography>
+                                <Select name="urgent" value={stoolData.urgent} onChange={handleChange}>
+                                    <MenuItem value="yes">Yes</MenuItem>
+                                    <MenuItem value="no">No</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid>
+                                <Typography>Pain:</Typography>
+                                <Select name="pain" value={stoolData.pain} onChange={handleChange}>
+                                    <MenuItem value="yes">Yes</MenuItem>
+                                    <MenuItem value="no">No</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid>
+                                <Typography>Type:</Typography>
+                                <Select name="type" value={stoolData.type} onChange={handleChange} required>
+                                    <MenuItem value="1">Type 1</MenuItem>
+                                    <MenuItem value="2">Type 2</MenuItem>
+                                    <MenuItem value="3">Type 3</MenuItem>
+                                    <MenuItem value="4">Type 4</MenuItem>
+                                    <MenuItem value="5">Type 5</MenuItem>
+                                    <MenuItem value="6">Type 6</MenuItem>
+                                    <MenuItem value="7">Type 7</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid>
+                                <Typography>Size:</Typography>
+                                <Select name="size" value={stoolData.size} onChange={handleChange} required>
+                                    <MenuItem value="small">Small</MenuItem>
+                                    <MenuItem value="medium">Medium</MenuItem>
+                                    <MenuItem value="large">Large</MenuItem>
+                                </Select>
+                            </Grid>
+                            <Grid>
+                                <Typography>Color:</Typography>
+                                <Select name="color" value={stoolData.color} onChange={handleChange} required>
+                                    <MenuItem value="Brown">Brown</MenuItem>
+                                    <MenuItem value="Yellow">Yellow</MenuItem>
+                                    <MenuItem value="red">Red</MenuItem>
+                                    <MenuItem value="green">Green</MenuItem>
+                                    <MenuItem value="black">Black</MenuItem>
 
-                <label>Blood:</label>
-                <select
-                    name="blood"
-                    value={stoolData.blood}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-                <br />
+                                </Select>
+                            </Grid>
+            </Grid>
 
-                <label>Urgent:</label>
-                <select
-                    name="urgent"
-                    value={stoolData.urgent}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-                <br />
-
-                <label>Pain:</label>
-                <select
-                    name="pain"
-                    value={stoolData.pain}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="yes">Yes</option>
-                    <option value="no">No</option>
-                </select>
-                <br />
-
-                <label>Type:</label>
-                <select
-                    name="type"
-                    value={stoolData.type}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select Type</option>
-                    <option value="1">Type 1</option>
-                    <option value="2">Type 2</option>
-                    <option value="3">Type 3</option>
-                    <option value="4">Type 4</option>
-                    <option value="5">Type 5</option>
-                    <option value="6">Type 6</option>
-                    <option value="7">Type 7</option>
-
-                </select>
-                <br />
-
-                <label>Size:</label>
-                <select
-                    name="size"
-                    value={stoolData.size}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select size</option>
-                    <option value="small">Small</option>
-                    <option value="medium">Medium</option>
-                    <option value="large">Large</option>
-                </select>
-                <br />
-
-                <label>Color:</label>
-                <select
-                    name="color"
-                    value={stoolData.color}
-                    onChange={handleChange}
-                    required
-                >
-                    <option value="">Select color</option>
-                    <option value="Brown">Brown</option>
-                    <option value="Yellow">Yellow</option>
-                    <option value="red">Red</option>
-                    <option value="green">Green</option>
-                    <option value="black">Black</option>
-                </select>
-                <br />
-
-                <label>Notes:</label>
-                <textarea
-                    name="notes"
-                    value={stoolData.notes}
-                    onChange={handleChange}
-                />
+                <Typography>Notes:</Typography>
+                <TextareaAutosize
+                            name="notes"
+                            value={stoolData.notes}
+                            onChange={handleChange}
+                            placeholder="Enter your notes here"
+                        />
                 <br />
                 <Button type='submit'>Submit Record</Button>
             </form>
