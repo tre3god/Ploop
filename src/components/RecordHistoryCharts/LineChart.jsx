@@ -54,9 +54,9 @@ export default function LineChart({ allRecords }) {
 
 
   return (
-    <Paper
+    <Paper elevation={6}
       style={{
-        width: "400px", 
+        width: "500px", 
         height: "300px", 
       }}
     >

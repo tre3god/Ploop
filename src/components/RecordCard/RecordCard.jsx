@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import {
   Paper,
   Button,
-  TextField,
+  Typography,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
@@ -108,13 +108,21 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
         record={editedRecord}
         onSave={handleSaveEdit}
       />
+      <Typography variant="h4" gutterBottom>
+        Record History
+      </Typography>
 
-      <div>Record History</div>
-      <SortButton sortAscending={sortAscending} setSortAscending={setSortAscending} allRecords={allRecords} setAllRecords={setAllRecords}/>
+      <SortButton 
+        sortAscending={sortAscending} 
+        setSortAscending={setSortAscending} 
+        allRecords={allRecords} 
+        setAllRecords={setAllRecords}
+      />
+
       {allRecords?.map((record, index) => (
         <Paper
           key={index}
-          elevation={3}
+          elevation={4}
           style={{ padding: 16, marginBottom: 16, width: 350 }}
         >
           <div>

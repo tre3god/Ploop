@@ -1,78 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import { fetchAllUsers } from '../../utilities/users-service';
-
 import { Link } from 'react-router-dom';
-
+import { Container, Typography, TextField, List, ListItem } from '@mui/material';
 
 export default function HcProfPage() {
   const [userRecords, setUserRecords] = useState([]);
-
-  // for search bar
   const [query, setQuery] = useState("");
-  const [searchUsers, setSearchUsers] = useState([])
-
+  const [searchUsers, setSearchUsers] = useState([]);
 
   const updateQuery = (event) => {
-    setQuery(event.target.value)
-    console.log(query)
+    setQuery(event.target.value);
   }
 
-  // list of all users with role: 'users'
   useEffect(() => {
-    async function fetchUsers () {
-      try { 
-        const allUserRecords = await fetchAllUsers()
-        setUserRecords(allUserRecords)
+    async function fetchUsers() {
+      try {
+        const allUserRecords = await fetchAllUsers();
+        setUserRecords(allUserRecords);
       } catch (error) {
         console.error('Error:', error);
       }
     }
     fetchUsers();
-  }, [])
+  }, []);
 
-  // search bar to find specific
   useEffect(() => {
     const fetchSearch = async () => {
-    // so it doesnt search on empty or 1-2 letters
-    if (query.length > 2) {
-        const allUserRecords = await fetchAllUsers() 
-        console.log(allUserRecords)
-
+      if (query.length > 2) {
+        const allUserRecords = await fetchAllUsers();
         const first5Users = allUserRecords.slice(0, 5);
-        setSearchUsers(first5Users)
+        setSearchUsers(first5Users);
       } else {
-        setSearchUsers([])
+        setSearchUsers([]);
       }
     }
-    fetchSearch()
-  }, [query])
+    fetchSearch();
+  }, [query]);
 
   return (
-    <>
-    <h1>User's List</h1>
-      <ul>
-        {userRecords.map((user) => (
-          <li key={user._id}>
-          <Link to={`/search/${user._id}`}>
-          {user.name}
-          </Link>
-          </li>
+    <Container >
+      <Typography variant="h4" gutterBottom>
+        User's Name List
+      </Typography>
+      <List>
+        {userRecords.map((user, index) => (
+          <ListItem key={user._id}>
+            <Link to={`/search/${user._id}`}>
+              {index+1}. {user.name}
+            </Link>
+          </ListItem>
         ))}
-      </ul>
-      <br></br>
-      <h1>Search Bar</h1>
-      <input 
-        type="text"
+      </List>
+
+      <Typography variant="h4" gutterBottom>
+        Search Bar
+      </Typography>
+      <TextField
+        fullWidth
+        label="Search..."
         placeholder="Search..."
+        variant="outlined"
+        value={query}
         onChange={(event) => updateQuery(event)}
       />
-      {searchUsers.map((user) => (
-        <div key={user._id}>
-          <Link to={`/search/${user._id}`}>
-          {user.name}
-          </Link>
-        </div>
-      ))}
-    </>
-  )
+      <List>
+        {searchUsers.map((user) => (
+          <ListItem key={user._id}>
+            <Link to={`/search/${user._id}`}>
+              {user.name}
+            </Link>
+          </ListItem>
+        ))}
+      </List>
+    </Container>
+  );
 }

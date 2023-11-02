@@ -1,6 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
-import { Paper, Button } from '@mui/material'; 
+import { Paper, Button, Typography } from '@mui/material'; 
 import { useNavigate } from 'react-router-dom';
 
 export default function HcRecordCard({ oneUserRecords }) {
@@ -15,7 +15,7 @@ export default function HcRecordCard({ oneUserRecords }) {
   function formatDate(dateString) {
     const date = new Date(dateString);
 
-    // format date as how you want
+    // format date as how i want
     const formattedDate = format(date, "dd MMMM, yyyy hh:mm a");
 
     return formattedDate;
@@ -23,12 +23,14 @@ export default function HcRecordCard({ oneUserRecords }) {
 
   return (
     <>
-      <div>HcRecordCard</div>
+      <Typography variant="h4" gutterBottom>
+        Record History
+      </Typography>
       {oneUserRecords && oneUserRecords.length > 0 ? (
         oneUserRecords.map((record, index) => (
           <Paper
             key={index}
-            elevation={3}
+            elevation={4}
             style={{ padding: 16, marginBottom: 16, width: 350 }}
           >
             <div>
@@ -64,6 +66,8 @@ export default function HcRecordCard({ oneUserRecords }) {
             <Button 
               onClick={handleComment}
               recordId={record._id}
+              variant="contained"
+              color="secondary"
             >
               Comment
             </Button>

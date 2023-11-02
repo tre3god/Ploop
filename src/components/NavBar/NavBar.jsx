@@ -7,9 +7,11 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
 export default function NavBar({ user, setUser }) {
   const [anchorEl, setAnchorEl] = useState(null);
+  const navigate = useNavigate();
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,20 +23,23 @@ export default function NavBar({ user, setUser }) {
 
   const handleLogout = () => {
     logOut();
-    setUser(null);
+    setUser(null); 
+    navigate("/")
   };
 
   return (
     <AppBar position="static" style={{ background: "white" }}>
       <Toolbar>
+        <Link to="/">
         <img
           src="https://i.imgur.com/6Rgthpn.png"
           alt="Logo"
           width="120"
           height="auto"
-          style={{ marginRight: "620px" }}
+          style={{ marginLeft: "50px", marginRight: "650px" }}
         />
-        <Typography variant="h6" style={{ color: "black", width: "90%" }}>
+        </Link>
+        <Typography variant="h6" style={{ color: "black", width: "45%" }}>
           <span>Welcome, {user.name}</span>
         </Typography>
         <Button

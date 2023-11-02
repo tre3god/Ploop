@@ -20,8 +20,15 @@ export default function SortButton({ sortAscending, setSortAscending, allRecords
   };
 
   return (
-    <Button onClick={handleSortToggle}>
+    <>
+    <div>Sort By</div>
+    <Button 
+    onClick={handleSortToggle}
+    variant="outlined"
+    
+    >
       {sortAscending ? 'Earliest Date First' : 'Latest Date First'}
     </Button>
+    </>
   );
 }
