@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Typography, Container, Paper } from '@mui/material';
-import LoginPage from './LoginPage';
-import SignUpPage from './SignupPage';
 import authPageStyles from './AuthPageStyles'; 
+import LoginPage from './LoginPage';
+import SignUpPage from "./SignUpPage";
 
 
 export default function AuthPage({ setUser }) {
