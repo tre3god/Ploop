@@ -34,6 +34,7 @@ export default function App() {
 	}, [user]);
 
 return (
+  <>
   <main className="App">
     {user ? (
       <>
@@ -71,9 +72,22 @@ return (
         </Routes>
       </>
     )}
-
-		
   </main>
+  <br />
+			<hr />
+      <footer className="text-center text-dark text-opacity-50">
+				<small>
+					Ploop&trade; (est 2023)
+					<br />A project by{" "}
+					<a
+						className="link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+						href="https://github.com/tre3god">
+						tre3god
+					</a>
+				</small>
+			</footer>
+			<br />
+  </>
 );
 
 }
