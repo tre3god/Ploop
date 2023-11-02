@@ -3,17 +3,24 @@ import { format } from "date-fns";
 import {
   Paper,
   Button,
+  TextField,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditRecordModal from '../EditRecordModal/EditRecordModal';
 import * as recordsService from '../../utilities/records-service/';
 import * as userService from '../../utilities/users-service';
 import { useNavigate } from 'react-router-dom';
+import SortButton from '../SortButton/SortButton';
+import MyDatePicker from '../DatePicker/DatePicker';
+
+
 
 
 export default function RecordCard({ allRecords, setAllRecords, user, setUser }) {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editedRecord, setEditedRecord] = useState({});
+  const [sortAscending, setSortAscending] = useState(false);
+
   const navigate = useNavigate();
 
   const handleEdit = async (event) => {
@@ -93,9 +100,7 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
     console.log(`clicked comments for reccordId: ${recordId}`)
     navigate(`/search/${recordId}/comment`)
   }
-
-
-
+  
   return (
     <>
       <EditRecordModal
@@ -105,8 +110,8 @@ export default function RecordCard({ allRecords, setAllRecords, user, setUser })
         onSave={handleSaveEdit}
       />
 
-      <div>RecordCard</div>
-      <br></br>
+      <div>Record History</div>
+      <SortButton sortAscending={sortAscending} setSortAscending={setSortAscending} allRecords={allRecords} setAllRecords={setAllRecords}/>
       {allRecords?.map((record, index) => (
         <Paper
           key={index}
