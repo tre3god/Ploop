@@ -52,10 +52,10 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
     return (
         <>
             <Modal open={isOpen} onClose={onClose}>
-            <div style={{ margin: 'auto', width: 300 }}>
+            <div style={{ margin: 'auto', width: 450 }}>
 
             <Paper elevation={3} style={{ padding: 16 }}>
-
+            <div>Add a new Stool Record!</div>
             <form onSubmit={handleSubmit}>
                 <label>Duration:</label>
                 <br></br>
@@ -167,6 +167,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
                 <br />
                 <Button type='submit'>Submit Record</Button>
             </form>
+            <img src='https://www.restoralax.ca/sites/g/files/vrxlpx21671/files/styles/desktop_1000xauto/public/2021-07/bristol-stool-chart-fs-md.png?itok=PBN_iiW0'/>
             </Paper>
             </div>
 
