@@ -1,5 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Paper, Button } from '@mui/material';
+import {
+  Modal,
+  Paper,
+  Button,
+  Grid,
+  Select,
+  MenuItem,
+  FormControl,
+  TextareaAutosize,
+  Typography,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+} from '@mui/material';
 
 export default function EditRecordModal({ isOpen, onClose, record, onSave }) {
   const [editedRecord, setEditedRecord] = useState({ ...record });
@@ -27,125 +40,94 @@ export default function EditRecordModal({ isOpen, onClose, record, onSave }) {
     <Modal open={isOpen} onClose={onClose}>
       <div style={{ margin: 'auto', width: 300 }}>
         <Paper elevation={3} style={{ padding: 16 }}>
-          <label>Duration:</label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              name="duration"
-              value="1-3 mins"
-              checked={editedRecord.duration === '1-3 mins'}
-              onChange={handleChange}
-            />
-            1-3 mins
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="duration"
-              value="3-10 mins"
-              checked={editedRecord.duration === '3-10 mins'}
-              onChange={handleChange}
-            />
-            3-10 mins
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="duration"
-              value="10 mins+"
-              checked={editedRecord.duration === '10 mins+'}
-              onChange={handleChange}
-            />
-            10 mins+
-          </label>
-          <br />
-
-          <label>Blood:</label>
-          <select
-            name="blood"
-            value={editedRecord.blood}
-            onChange={handleChange}
-          >
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-          <br />
-
-          <label>Urgent:</label>
-          <select
-            name="urgent"
-            value={editedRecord.urgent}
-            onChange={handleChange}
-          >
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-          <br />
-
-          <label>Pain:</label>
-          <select
-            name="pain"
-            value={editedRecord.pain}
-            onChange={handleChange}
-          >
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
-          </select>
-          <br />
-
-          <label>Type:</label>
-          <select
-            name="type"
-            value={editedRecord.type}
-            onChange={handleChange}
-          >
-            <option value="">Select Type</option>
-            <option value="1">Type 1</option>
-            <option value="2">Type 2</option>
-            <option value="3">Type 3</option>
-            <option value="4">Type 4</option>
-            <option value="5">Type 5</option>
-            <option value="6">Type 6</option>
-            <option value="7">Type 7</option>
-          </select>
-          <br />
-
-          <label>Size:</label>
-          <select
-            name="size"
-            value={editedRecord.size}
-            onChange={handleChange}
-          >
-            <option value="">Select size</option>
-            <option value="small">Small</option>
-            <option value="medium">Medium</option>
-            <option value="large">Large</option>
-          </select>
-          <br />
-
-          <label>Color:</label>
-          <select
-            name="color"
-            value={editedRecord.color}
-            onChange={handleChange}
-          >
-            <option value="">Select color</option>
-            <option value="Brown">Brown</option>
-            <option value="Yellow">Yellow</option>
-            <option value="red">Red</option>
-            <option value="green">Green</option>
-            <option value="black">Black</option>
-          </select>
-          <br />
-
-          <label>Notes:</label>
-          <textarea
-            name="notes"
-            value={editedRecord.notes}
-            onChange={handleChange}
-          />
-          <br />
+        <Typography variant="h6" align="center" gutterBottom>
+                Edit your record
+            </Typography>
+          <form>
+            <Grid container spacing={1} align="center">
+              <Grid>
+                <Typography>Duration:</Typography>
+                <FormControl component="fieldset">
+                  <RadioGroup name="duration" value={editedRecord.duration} onChange={handleChange}>
+                    <FormControlLabel 
+                    value="1-3 mins" 
+                    checked={editedRecord.duration === '1-3 mins'} 
+                    control={<Radio />} label="1-3 mins" 
+                    />
+                    <FormControlLabel 
+                    value="3-10 mins" 
+                    checked={editedRecord.duration === '3-10 mins'} 
+                    control={<Radio />} label="3-10 mins" 
+                    />
+                    <FormControlLabel 
+                    value="10 mins+" 
+                    checked={editedRecord.duration === '10 mins+'} 
+                    control={<Radio />} label="10 mins+" 
+                    />
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
+              <Grid>
+                <Typography>Blood:</Typography>
+                <Select name="blood" defaultValue={record.blood} onChange={handleChange}>
+                  <MenuItem value="yes">Yes</MenuItem>
+                  <MenuItem value="no">No</MenuItem>
+                </Select>
+              </Grid>
+              <Grid>
+                <Typography>Urgent:</Typography>
+                <Select name="urgent" defaultValue={record.urgent} onChange={handleChange}>
+                  <MenuItem value="yes">Yes</MenuItem>
+                  <MenuItem value="no">No</MenuItem>
+                </Select>
+              </Grid>
+              <Grid>
+                <Typography>Pain:</Typography>
+                <Select name="pain" defaultValue={record.pain} onChange={handleChange}>
+                  <MenuItem value="yes">Yes</MenuItem>
+                  <MenuItem value="no">No</MenuItem>
+                </Select>
+              </Grid>
+              <Grid xs="4">
+                <Typography>Type:</Typography>
+                <Select name="type" defaultValue={record.type} onChange={handleChange} required>
+                  <MenuItem value="1">Type 1</MenuItem>
+                  <MenuItem value="2">Type 2</MenuItem>
+                  <MenuItem value="3">Type 3</MenuItem>
+                  <MenuItem value="4">Type 4</MenuItem>
+                  <MenuItem value="5">Type 5</MenuItem>
+                  <MenuItem value="6">Type 6</MenuItem>
+                  <MenuItem value="7">Type 7</MenuItem>
+                </Select>
+              </Grid>
+              <Grid xs="4">
+                <Typography>Size:</Typography>
+                <Select name="size" defaultValue={record.size} onChange={handleChange} required>
+                  <MenuItem value="small">Small</MenuItem>
+                  <MenuItem value="medium">Medium</MenuItem>
+                  <MenuItem value="large">Large</MenuItem>
+                </Select>
+              </Grid>
+              <Grid xs="4">
+                <Typography>Color:</Typography>
+                <Select name="color" defaultValue={record.color} onChange={handleChange} required>
+                  <MenuItem value="Brown">Brown</MenuItem>
+                  <MenuItem value="Yellow">Yellow</MenuItem>
+                  <MenuItem value="red">Red</MenuItem>
+                  <MenuItem value="green">Green</MenuItem>
+                  <MenuItem value="black">Black</MenuItem>
+                </Select>
+                </Grid>
+                <Typography align="left">Notes:</Typography>
+                  <TextareaAutosize
+                    name="notes"
+                    defaultValue={record.notes}
+                    onChange={handleChange}
+                    placeholder="Enter your notes here"
+                    style={{ width: '100%' }}
+                  />
+            </Grid>
+          </form>
           <Button
             variant="contained"
             color="primary"

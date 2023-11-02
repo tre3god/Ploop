@@ -12,7 +12,8 @@ import {
     Radio,
     RadioGroup,
     FormControlLabel,
-} from '@mui/material';import { useNavigate } from 'react-router-dom';
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import { createRecord } from '../../utilities/records-service';
 import { addRecord } from '../../utilities/users-service';
 
