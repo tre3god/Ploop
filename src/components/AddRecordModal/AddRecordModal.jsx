@@ -7,7 +7,6 @@ import {
     Select,
     MenuItem,
     FormControl,
-    InputLabel,
     TextareaAutosize,
     Typography,
     Radio,
@@ -28,7 +27,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
         pain: "no",
         type: "4",
         size: "medium",
-        color: "",
+        color: "Brown",
         notes: "",
     });
 
@@ -68,11 +67,11 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
             <div style={{ margin: 'auto', width: 450 }}>
 
             <Paper elevation={3} style={{ padding: 16, width: '400px' }}>
-            <Typography variant="h5" align="center">
+            <Typography variant="h6" align="center" gutterBottom>
                 Add a New Stool Record
             </Typography>
             <form onSubmit={handleSubmit}>
-            <Grid container spacing={1}>
+            <Grid container spacing={1} align="center">
                             <Grid item xs={5}>
                                 <Typography>Duration:</Typography>
                                 <FormControl component="fieldset">
@@ -104,7 +103,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
                                     <MenuItem value="no">No</MenuItem>
                                 </Select>
                             </Grid>
-                            <Grid>
+                            <Grid xs="4">
                                 <Typography>Type:</Typography>
                                 <Select name="type" value={stoolData.type} onChange={handleChange} required>
                                     <MenuItem value="1">Type 1</MenuItem>
@@ -116,7 +115,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
                                     <MenuItem value="7">Type 7</MenuItem>
                                 </Select>
                             </Grid>
-                            <Grid>
+                            <Grid xs="4">
                                 <Typography>Size:</Typography>
                                 <Select name="size" value={stoolData.size} onChange={handleChange} required>
                                     <MenuItem value="small">Small</MenuItem>
@@ -124,7 +123,7 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
                                     <MenuItem value="large">Large</MenuItem>
                                 </Select>
                             </Grid>
-                            <Grid>
+                            <Grid xs="4">
                                 <Typography>Color:</Typography>
                                 <Select name="color" value={stoolData.color} onChange={handleChange} required>
                                     <MenuItem value="Brown">Brown</MenuItem>
@@ -135,20 +134,26 @@ export default function AddRecordModal({ user, setUser, isOpen, onClose }) {
 
                                 </Select>
                             </Grid>
+                            <Typography align="left">Notes:</Typography>
+                                <TextareaAutosize
+                                    name="notes"
+                                    value={stoolData.notes}
+                                    onChange={handleChange}
+                                    placeholder="Enter your notes here"
+                                    style={{ width: '100%' }}
+                                />
             </Grid>
-
-                <Typography>Notes:</Typography>
-                <TextareaAutosize
-                            name="notes"
-                            value={stoolData.notes}
-                            onChange={handleChange}
-                            placeholder="Enter your notes here"
-                        />
                 <br />
-                <Button type='submit'>Submit Record</Button>
-            </form>
-            <img src='https://www.restoralax.ca/sites/g/files/vrxlpx21671/files/styles/desktop_1000xauto/public/2021-07/bristol-stool-chart-fs-md.png?itok=PBN_iiW0'/>
-            </Paper>
+                <Button type="submit" variant="contained" color="primary" fullWidth>
+                    Submit Record</Button>
+                </form>
+                    <div style={{ textAlign: 'center', marginTop: '16px' }}>
+                        <img
+                            src="https://www.restoralax.ca/sites/g/files/vrxlpx21671/files/styles/desktop_1000xauto/public/2021-07/bristol-stool-chart-fs-md.png?itok=PBN_iiW0"
+                            style={{ width: '100%' }}
+                        />
+                    </div>            
+                    </Paper>
             </div>
 
             </Modal>

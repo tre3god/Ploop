@@ -27,7 +27,7 @@ export default function SignUpPage({ setUser }) {
     try {
       const user = await signUp(formData);
       setUser(user);
-      navigate("/user");
+      navigate("/");
     } catch (error) {
       setError("Sign up Failed - Try again");
     }

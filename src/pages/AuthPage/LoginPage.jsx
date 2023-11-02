@@ -22,7 +22,7 @@ export default function LoginPage({ setUser }) {
 			const user = await login(credentials);
 			setUser(user);
 			if (user.role === 'users') {
-				navigate("/user")
+				navigate("/")
 			} else {
 				navigate("/hcprof")
 			}
