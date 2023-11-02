@@ -45,7 +45,7 @@ return (
               <Route path="/user/analysis" element={<AnalysisPage user={user} setUser={updateUser} />} />
               <Route path="/calender" element={<CalenderPage user={user} setUser={updateUser} />} />
               <Route path="/learn" element={<LearnPage />} />
-              <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} />} />
+              <Route path="/search/:recordId/comment" element={<HcCommentPage user={user} queryUser={queryUser} setQueryUser={setQueryUser}/>} />
               <Route path="*" element={<ErrorPage />} />
             </Routes>
           </>

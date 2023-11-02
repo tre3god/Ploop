@@ -7,15 +7,16 @@ import { createComment, getAllComments } from '../../utilities/comments-service'
 import { useNavigate } from 'react-router-dom';
 
 
-export default function HcCommentPage({ user, queryUser }) {
+export default function HcCommentPage({ user, queryUser, setQueryUser }) {
     const { recordId } = useParams();
+    // console.log(recordId)
     const [oneRecord, setOneRecord] = useState({});
     const [commentData, setCommentData] = useState({ 
         advisorName: "",
-        stoolRecordId: oneRecord?._id,
+        stoolRecordId: recordId,
         comment: "",
     });
-    const [allComments, setAllComments] = useState();
+    const [allComments, setAllComments] = useState([]);
 
     const navigate = useNavigate();
     
@@ -32,7 +33,7 @@ export default function HcCommentPage({ user, queryUser }) {
         
         getOneRecord(); 
     }, [recordId]);
-    // console.log(oneRecord);
+    console.log("onerecord", oneRecord);
 
     // fetch all comments
     useEffect(() => {
@@ -45,7 +46,7 @@ export default function HcCommentPage({ user, queryUser }) {
             }
         }
         getAllComms();
-    }, [])
+    }, [recordId])
     console.log("allcomments", allComments)
 
     //
@@ -80,9 +81,19 @@ export default function HcCommentPage({ user, queryUser }) {
 
     return (
         <>
+            {user.role === 'users' ? (
             <div>
-                Patient: {queryUser[0]?.name}'s stool record comment page.
+                Your selected record
             </div>
+                ) : user.role === 'hcprof' ? (
+                <div>
+                Patient: {queryUser[0]?.name}'s stool record comment page.
+                </div>
+                ) : (
+            <div>
+                User role not recognized.
+            </div>
+            )}
             {oneRecord._id && (
                 <Paper
                     elevation={3}
