@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { signUp } from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { Button, Container, TextField, Typography } from "@mui/material";
+
 
 export default function SignUpPage({ setUser }) {
   const [formData, setFormData] = useState({
@@ -34,47 +36,62 @@ export default function SignUpPage({ setUser }) {
   const disable = formData.password !== formData.confirm;
 
   return (
-    <div>
-      <div className="form-container">
-        <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Name</label>
-          <input
+    <Container>
+      <div>
+        <Typography variant="h4">
+          Sign Up
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="Name"
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
           />
-          <label>Email</label>
-          <input
+          <TextField
+            fullWidth
+            label="Email"
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
           />
-          <label>Password</label>
-          <input
+          <TextField
+            fullWidth
+            label="Password"
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             required
           />
-          <label>Confirm</label>
-          <input
+          <TextField
+            fullWidth
+            label="Confirm"
             type="password"
             name="confirm"
             value={formData.confirm}
             onChange={handleChange}
             required
           />
-          <button type="submit" disabled={disable}>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            fullWidth
+            disabled={disable}
+          >
             SIGN UP
-          </button>
+          </Button>
         </form>
       </div>
-      <p className="error-message">&nbsp;{error}</p>
-    </div>
+      <Typography color="error">
+        {error}
+      </Typography>
+    </Container>
   );
 }
