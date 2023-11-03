@@ -66,11 +66,11 @@ export default function NavBar({ user, setUser }) {
               Analysis
             </Link>
           </MenuItem>
-          <MenuItem onClick={handleMenuClose}>
+          {/* <MenuItem onClick={handleMenuClose}>
             <Link to="/learn" style={{ color: "inherit" }}>
               Learn
             </Link>
-          </MenuItem>
+          </MenuItem> */}
 			<MenuItem>
 			<Button 
 			color="error" 
